@@ -1,0 +1,49 @@
+/* Import Swiper styles */
+@import "~swiper/swiper-bundle.min.css";
+
+/* Lock kiosk viewport - eliminate scrollbars and page shifts */
+html, body {
+    overflow: hidden !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.cdk-global-scrollblock {
+    position: static !important;
+    overflow: hidden !important;
+    width: 100% !important;
+}
+
+.cdk-overlay-container {
+    position: fixed !important;
+    z-index: 999999999 !important;
+}
+
+.cdk-global-overlay-wrapper {
+    z-index: 999999999 !important;
+}
+
+.cdk-overlay-backdrop {
+    z-index: 999999998 !important;
+}
+
+.cdk-overlay-container,
+.cdk-overlay-backdrop,
+.cdk-global-overlay-wrapper,
+.cdk-overlay-pane {
+    overflow: hidden !important;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+}
+
+.cdk-overlay-container::-webkit-scrollbar,
+.cdk-global-overlay-wrapper::-webkit-scrollbar,
+.mat-dialog-container::-webkit-scrollbar,
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}

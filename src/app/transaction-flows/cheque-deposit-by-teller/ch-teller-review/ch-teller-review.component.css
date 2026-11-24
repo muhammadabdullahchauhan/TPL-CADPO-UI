@@ -1,0 +1,102 @@
+/* Parsed Cheque Review: Keeps exact same container size, background, and simplicity as the original block-details */
+.block-details.parsed-details-box {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Left Side: Cheque Details directly on card background */
+.cheque-parsed-left {
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: calc(50% - 58px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  align-content: center;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.ch-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ch-field.full {
+  grid-column: span 2;
+}
+
+.ch-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--block-details-first-text-color, #64748B);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.ch-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1E2540;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ch-val.blue {
+  color: #2E3192;
+  font-weight: 700;
+}
+
+.ch-val.font-mono {
+  font-family: monospace;
+  font-size: 12.5px;
+}
+
+.ch-val.small {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4A5568;
+}
+
+/* Right Side: Beneficiary Details directly on card background */
+.cheque-parsed-right {
+  position: absolute;
+  right: 28px;
+  top: 0;
+  bottom: 0;
+  width: calc(50% - 58px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  box-sizing: border-box;
+  text-align: right;
+}
+
+.cheque-parsed-right .ch-lbl {
+  font-size: 13px;
+}
+
+.cheque-parsed-right .ch-val.amount {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.cheque-parsed-right .ch-val {
+  font-size: 18px;
+}
+
+.cheque-parsed-right .ch-val.sub {
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748B;
+  margin-top: 3px;
+}

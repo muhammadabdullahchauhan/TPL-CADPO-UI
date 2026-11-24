@@ -1,0 +1,33 @@
+<div style="height: 150px; overflow: hidden;">
+  </div>
+  <br>
+
+
+
+  <ng-container *ngIf="!filteredCompaines">
+    <h1 class="underline">Billing Category</h1>
+  </ng-container>
+  <ng-container *ngIf="filteredCompaines">
+    <h1 class="underline">Billing Company</h1>
+  </ng-container>
+
+
+  <br>
+
+  <div class="billing-icon-container" *ngIf="!filteredCompaines">
+    <ng-container *ngFor="let category of companyTypes">
+      <div class="icon" (click)="selectCategory(category)">
+        <img src="assets/img/billing-icons/{{category}}.png" alt="{{category}} Icon">
+        <div class="icon-text">{{category}}</div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="billing-icon-container" *ngIf="filteredCompaines">
+    <ng-container *ngFor="let company of filteredCompaines">
+      <div class="icon companies" (click)="selectCompany(company)">
+        <img src="assets/img/billing-icons/{{company.companyCode}}.png" alt="{{company.companyName}} Icon">
+        <div class="icon-text">{{company.companyName}}</div>
+      </div>
+    </ng-container>
+  </div>
+ 

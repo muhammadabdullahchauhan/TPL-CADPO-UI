@@ -1,0 +1,5 @@
+<div  class="{{showPreview? 'show-webcam-preview   ' : 'hide-webcam-preview'}} ">
+ 
+    <webcam *ngIf="showWebcam" [width]="500" [trigger]="triggerObservable"
+        (imageCapture)="handleImage($event)"></webcam>
+</div>

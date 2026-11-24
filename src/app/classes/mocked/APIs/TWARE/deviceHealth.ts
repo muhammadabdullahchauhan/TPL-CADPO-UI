@@ -1,0 +1,3 @@
+export class deviceHealth{
+    static response = {"code":"0000","message":"Health Received","data":[{"deviceName":"Cash Acceptor","status":{"health":"OK","info":{"channelHas":false,"dropDoor":0,"processStatus":2,"shutter":0,"entryHasNotes":0,"escrowHasNotes":0,"exitHasNotes":0}}},{"deviceName":"Biometric Device","status":{"health":"OK","info":""}},{"deviceName":"Receipt Printer","status":{"health":"OK","info":""}}],"errors":null}
+}

@@ -1,0 +1,16 @@
+<div *ngIf="isVisible" class="kiosk-loader-backdrop">
+    <div class="kiosk-loader-content">
+        <!-- TouchPoint 3-Dot Orbital Loader -->
+        <div class="touchpoint-loader-stage">
+            <div class="loader-ambient-shadow"></div>
+            <div class="touchpoint-dot dot-navy-1"></div>
+            <div class="touchpoint-dot dot-navy-2"></div>
+            <div class="touchpoint-dot dot-orange"></div>
+        </div>
+
+        <!-- Dynamic Status Message -->
+        <p class="loader-message">
+            {{ (data && data !== '' && data !== 'Loading' && data !== 'Loading...') ? data : 'Please wait...' }}
+        </p>
+    </div>
+</div>

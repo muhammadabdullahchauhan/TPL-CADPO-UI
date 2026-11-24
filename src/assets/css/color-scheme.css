@@ -1,0 +1,61 @@
+:root {
+    /*--------------------------GLOBAL-------------------------*/
+
+    --primary-color: black;
+    --secondary-color:  #334E97;
+    --touchpoint-color: #FF5C00 ;
+
+    --heading-h1-color: #111;
+    --heading-h2-color: #111;
+    --heading-h3-color: #111;
+    --heading-h5-color: #111;
+ 
+    --heading-h6-color: #000;
+    --body-text-color: #000;
+    
+    --bullets-color: #FFF;
+    --input-text-border: #FFF;
+    --input-text-background: #00000075;
+    --input-text-color: #FFF;
+    --input-dropdown-arrow-color: #aaa;
+    --footer-button-text-color: #fff;
+    --footer-prev-arrow-color: var(--primary-color);
+    --footer-next-arrow-color: #16AB52;
+    --footer-button-circle-background: linear-gradient(0deg, rgba(238, 238, 238, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    --button-background: linear-gradient(0deg, rgba(47, 66, 144, 1) 0%, rgba(65, 113, 172, 1) 100%);
+
+    --button-next-background: linear-gradient(180deg, #FFB700 0%, #B48100 100%) !important;
+    --button-cancel-background: linear-gradient(180deg, #F00 0%, #A30A00 100%);
+    --button-success-background: linear-gradient(0deg, #12B252 0%, rgba(18, 178, 82, 0.67) 100%);
+    --header-drawer-background-color: #ff0000c2;
+    --header-drawer-text-color: #fff;
+    --footer-drawer-background-color: #F8F8F8F2;
+
+    --caption-background-color: linear-gradient(0deg, var(--primary-color) 50%, rgb(255, 255, 255) 200%);
+    --caption-text-color: #fff;
+    --block-details-border-color: #dadada;
+    --block-details-background-color: linear-gradient(270deg, #F2F2F2 0%, rgba(248, 248, 248, 0.77) 100%);
+    --block-details-circle-background-color: #DBDBDB;
+    --block-details-arrow-color: #fff;
+    --block-details-first-text-color: #6f6f6f;
+    --block-details-n-text-color: #000;
+
+    --receipt-printer-art-background: linear-gradient(0deg, rgba(47, 66, 144, 1) 0%, rgba(65, 113, 172, 1) 100%);
+
+
+    /**NUMPAD*/
+    --numpad-button-color: #fff;
+    /*  --numpad-button-background:linear-gradient(0deg, rgba(47,65,144,1) 0%, rgba(66,114,171,1) 100%);*/
+    --numpad-button-background-clear: linear-gradient(180deg, #F00 0%, #A30A00 100%);
+    /*---------------------------------------------------------
+
+    /* HOME PAGE*/
+    --crousel-bullet-background: #D6D6D6;
+    --crousel-bullet-active-background: #869791;
+    --button-transaction-background: #6b337b;
+    --button-transaction-pressed-background: var( --button-next-background);
+    --button-transaction-hover-color: #fff;
+    --button-transaction-border: rgb(223, 223, 223);
+
+
+}

@@ -1,0 +1,76 @@
+<div style="height: 30px;"></div>
+
+<div class="details-container">
+    <div class="component-container">
+        <div class="row">
+            <div class="flex-container">
+                <div class="flex-item" [ngClass]="{'active': selectedField == 'account'}" (click)="focusField('account')">
+                    <p class="input-field-label account">
+                        Select Account #<br>
+                    </p>
+                    <div class="toggle">
+                        <div class="prevent-wrapper full" (click)="toggleAccountList()">
+                            <input type="text" class="dots-input account" [value]="selectedAccountNo" #inputAccount placeholder="XXXXXXXXXXXXXXXX">
+                            <div class="arrows" [ngClass]="{'flipped': isFlippedaccount}">
+                                <!-- Add your dropdown arrow image here if needed -->
+                            </div>
+                        </div>
+                    </div>                                      
+                </div>
+                
+                <div class="flex-item prevent-wrapper full" [ngClass]="{'active': selectedField == 'amount'}" (click)="focusField('amount')">
+                    <p class="input-field-label amount">
+                        Enter Amount<br>
+                       
+                    </p>
+                    <input type="text" class="dots-input amount" maxlength="10" #inputAmount placeholder="XXXXX">
+                </div>
+            </div>
+            
+            <div class="flex-container adjusted-flex-container">
+                <div class="flex-item prevent-wrapper full adjusted-flex-item" [ngClass]="{'active': selectedField == 'mobile' }" (click)="focusField('mobile')">
+                    <p class="input-field-label mobile">
+                        Enter Mobile Number<br>
+                    </p>
+                    <input type="text" class="dots-input mobile" maxlength="11" #inputMobile placeholder="03XXXXXXXXX">
+                </div>
+                <div class="flex-item" [ngClass]="{'active': selectedField == 'purpose'}" (click)="focusField('purpose')">
+                    <p class="input-field-label toggle">
+                        Purpose Of Transaction<br>
+                    </p>
+                    <div class="prevent-wrapper full" (click)="togglePurposeList()" style="cursor: pointer;">
+                        <input type="text" class="dots-input toggle" #inputPurpose placeholder="Select Purpose" readonly [title]="inputPurpose.value || 'Select Purpose'">
+                        <div class="arrows go-right" [ngClass]="{'flipped': isFlipped}">
+                            <!-- <img src="../assets/img/arrow.png" alt="arrows"> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="purpose-list-wrapper close" style="z-index: 99999;">
+            <div class="radio-list" style="z-index: 99999;">
+                <ng-container *ngFor="let option of purposeOptions">
+                    <div class="radio-control" style="z-index: 999999;">
+                        <input type="radio" name="option" (change)="selectPurpose(option.id, option.purpose)" [id]="'radio--' + option.id" />
+                        <label for="radio--{{option.id}}">{{option.purpose}}</label>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        
+        <div class="account-list-wrapper close" style="z-index: 99999;">
+            <div class="radio-list account-size" style="z-index: 99999;">
+                <ng-container *ngFor="let account of accountsList">
+                    <div class="radio-control" style="z-index: 999999;">
+                        <input type="radio" name="account" (change)="selectAccount(account.accountNo)" [id]="'radio--' + account.accountNo" />
+                        <label for="radio--{{account.accountNo}}">{{account.accountNo}}</label>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        
+        <div style="height: 173px;"></div>
+        <shared-numpad (typeCharacter)="typeNumeric($event)"></shared-numpad>
+    </div>
+</div>

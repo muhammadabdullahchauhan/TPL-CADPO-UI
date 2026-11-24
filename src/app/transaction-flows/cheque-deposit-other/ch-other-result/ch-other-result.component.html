@@ -1,0 +1,65 @@
+<div class="transparent-overlay"></div>
+
+<div class="result-container">
+  <div class="transaction-box-wrapper">
+    <div class="transaction-box">
+      <div class="result-status-section">
+        <!-- Success: Transaction Completed Successfully -->
+        <ng-container *ngIf="isSuccess && !isPending">
+          <img src="assets/img/success.gif" class="result-status-img" alt="Success" />
+          <p class="result-status-msg">Your Transaction Has Been Completed Successfully!</p>
+        </ng-container>
+
+        <!-- Pending: Transaction is Pending or Cheque Needs Verification -->
+        <ng-container *ngIf="isPending">
+          <img src="assets/img/pending.gif" class="result-status-img" alt="Pending" />
+          <p class="result-status-msg">Your Transaction Is Pending</p>
+          <div class="pending-verification-card">
+            <span class="pending-warn-icon">⚠️</span>
+            <div class="pending-card-text">
+              <span class="pending-msg-eng">Your Cheque Will Be Deposited After Verification</span>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Failed -->
+        <ng-container *ngIf="!isSuccess && !isPending">
+          <img src="assets/img/diag_icon_error.png" class="result-status-img" alt="Error" />
+          <p class="result-status-msg">Your Transaction Could Not Be Completed</p>
+        </ng-container>
+      </div>
+
+      <div class="transaction-details-list">
+        <p class="transaction-detail">Transaction # <span>{{ transactionNumber }}</span></p>
+        <p class="transaction-detail">Account Title <span>{{ accountTitle | titlecase }}</span></p>
+        <p class="transaction-detail">Beneficiary Account <span>{{ accountNumber }}</span></p>
+        <p class="transaction-detail">Cheque # <span>{{ (isChequeParsed && parsedChequeData?.cheque_number) ? parsedChequeData.cheque_number : chequeNo }}</span></p>
+        <p class="transaction-detail amount-row">{{ (!isPending && isChequeParsed) ? 'Entered Amount' : 'Amount' }} <span>Rs. {{ amount }}</span></p>
+        
+        <!-- All Parsed Cheque Data (Shown only when fully parsed and not pending) -->
+        <ng-container *ngIf="!isPending && isChequeParsed && parsedChequeData">
+          <p class="transaction-detail" *ngIf="parsedChequeData?.bank_name">Issuer Bank <span>{{ parsedChequeData.bank_name | titlecase }}</span></p>
+          <p class="transaction-detail" *ngIf="parsedChequeData?.account_number">Issuer Account # <span>{{ parsedChequeData.account_number }}</span></p>
+          <p class="transaction-detail" *ngIf="parsedChequeData?.payer">Issuer Name <span>{{ parsedChequeData.payer | titlecase }}</span></p>
+          <p class="transaction-detail" *ngIf="parsedChequeData?.payee">Beneficiary Name <span>{{ parsedChequeData.payee | titlecase }}</span></p>
+          <p class="transaction-detail" *ngIf="parsedChequeData?.date">Cheque Date <span>{{ parsedChequeData.date }}</span></p>
+          <p class="transaction-detail" *ngIf="parsedChequeData?.amount_in_number">Amount On Cheque <span>Rs. {{ parsedChequeData.amount_in_number?.toString()?.replace('/-', '') }}</span></p>
+          <p class="transaction-detail" *ngIf="parsedChequeData?.amount_in_words">Amount In Words <span>{{ parsedChequeData.amount_in_words | titlecase }}</span></p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  
+  <div class="action-buttons" *ngIf="isSuccess && areButtonsVisible">
+    <button [disabled]="btnIsBusy" [class.btn-active-pressed]="activeBtn === 'print'" class="print-btn" (click)="printCommand()">
+      <span class="print-icon"></span>
+      <span class="btn-text">Print Receipt</span>
+    </button>
+    <button [disabled]="btnIsBusy" [class.btn-active-pressed]="activeBtn === 'green'" class="green-btn" (click)="skipPrint()">
+      <span class="green-icon"></span>
+      <span class="btn-text">Go Green</span>
+    </button>
+  </div>
+</div>
+
+

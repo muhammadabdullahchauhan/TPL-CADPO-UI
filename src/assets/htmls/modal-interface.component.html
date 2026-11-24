@@ -1,0 +1,120 @@
+<ng-container *ngIf="!modalBundle.content">
+    <div class="modal-container">
+        <div class="modal-content" [ngClass]="{'small-height': modalBundle.modalType == '1'}" id="notification-modal">
+            <!-- Diagnostic Icon -->
+            <div class="modal-icon-wrapper">
+                <ng-container [ngSwitch]="modalBundle.icon">
+                    <img *ngSwitchCase="1" class="modal-image" src="assets/svg/diag_info.svg" alt="Info">
+                    <img *ngSwitchCase="2" class="modal-image" src="assets/svg/diag_error.svg" alt="Error">
+                    <img *ngSwitchCase="3" class="modal-image" src="assets/svg/diag_success.svg" alt="Success">
+                    <img *ngSwitchCase="4" class="modal-image" src="assets/svg/diag_warning.svg" alt="Warning">
+                    <img *ngSwitchCase="5" class="modal-image" src="assets/svg/diag_confirmation.svg" alt="Confirm">
+                    <img *ngSwitchCase="6" class="modal-image" src="assets/svg/diag_support.svg" alt="Support">
+                    <img *ngSwitchCase="'diag_icon_support.png'" class="modal-image" src="assets/svg/diag_support.svg" alt="Support">
+                    <img *ngSwitchDefault class="modal-image" [src]="'assets/svg/'+modalBundle.icon" alt="Dialog">
+                </ng-container>
+            </div>
+
+            <!-- Title & Message -->
+            <h1>{{modalBundle.title}}</h1>
+            <p>{{modalBundle.message}}</p>
+
+            <!-- Buttons Layout by Modal Type -->
+            <ng-container [ngSwitch]="modalBundle.modalType">
+                <div *ngSwitchCase="2" class="btn-group-single">
+                    <button class="btn-modal-info" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        {{buttons.okay || 'Okay'}}
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="3" class="btn-group-dual">
+                    <button class="btn-modal-left" [disabled]="btnIsBusy" (click)="onDismiss()">
+                        {{buttons.no || 'No'}}
+                    </button>
+                    <button class="btn-modal-right" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        {{buttons.yes || 'Yes'}}
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="5" class="btn-group-dual">
+                    <button class="btn-modal-left" [disabled]="btnIsBusy" (click)="onDismiss()">
+                        No
+                    </button>
+                    <button class="btn-modal-right" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        Yes
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="6" class="btn-group-dual">
+                    <button class="btn-modal-left" [disabled]="btnIsBusy" (click)="onDismiss()">
+                        Cancel
+                    </button>
+                    <button class="btn-modal-right" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        Proceed
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="7" class="btn-group-dual">
+                    <button class="btn-modal-left" [disabled]="btnIsBusy" (click)="onDismiss()">
+                        Cancel
+                    </button>
+                    <button class="btn-modal-right" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        Retry
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="modalBundle.content">
+    <div class="modal-container">
+        <div class="modal-content" id="notification-modal">
+            <div style="width: 100%;" [innerHTML]="modalBundle.content"></div>
+
+            <ng-container [ngSwitch]="modalBundle.modalType">
+                <div *ngSwitchCase="2" class="btn-group-single">
+                    <button class="btn-modal-info" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        {{buttons.okay || 'Okay'}}
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="3" class="btn-group-dual">
+                    <button class="btn-modal-left" [disabled]="btnIsBusy" (click)="onDismiss()">
+                        {{buttons.no || 'No'}}
+                    </button>
+                    <button class="btn-modal-right" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        {{buttons.yes || 'Yes'}}
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="5" class="btn-group-dual">
+                    <button class="btn-modal-left" [disabled]="btnIsBusy" (click)="onDismiss()">
+                        No
+                    </button>
+                    <button class="btn-modal-right" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        Yes
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="6" class="btn-group-dual">
+                    <button class="btn-modal-left" [disabled]="btnIsBusy" (click)="onDismiss()">
+                        Cancel
+                    </button>
+                    <button class="btn-modal-right" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        Proceed
+                    </button>
+                </div>
+
+                <div *ngSwitchCase="7" class="btn-group-dual">
+                    <button class="btn-modal-left" [disabled]="btnIsBusy" (click)="onDismiss()">
+                        Cancel
+                    </button>
+                    <button class="btn-modal-right" [disabled]="btnIsBusy" (click)="onConfirm()">
+                        Retry
+                    </button>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

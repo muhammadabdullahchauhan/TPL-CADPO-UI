@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<title>Cadepo</title>
+	<base href="/">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/x-icon" href="assets/img/icon.png">
+
+
+	<link href="assets/css/color-scheme.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/numpad.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/stepper.css" rel="stylesheet" type="text/css" />
+
+	<!-- <link rel="preconnect" href="https://fonts.gstatic.com"> -->
+
+	<script src="assets/js/jquery.min.js"></script>
+</head>
+
+<body>
+
+
+	<app-root [recievedTrigger]="myevent()"></app-root>
+</body>
+
+<script>
+
+	document.querySelectorAll('input').forEach(el => {
+		el.addEventListener('click', (e) => {
+
+			e.target.selectionStart = e.target.selectionEnd;
+
+		})
+	})
+
+	document.querySelectorAll('input').forEach(el => {
+		el.addEventListener('select', (e) => {
+
+			e.target.selectionStart = e.target.selectionEnd;
+
+		})
+	})
+
+	function focusStepper() {
+
+		var activeElementPosition = $('.here').position().left;
+		var desiredLeftPosition = activeElementPosition - 550;
+
+		$(".container").animate({ scrollLeft: desiredLeftPosition }, 500);
+	}
+
+
+	function toggleHeaderDrawer() {
+		const headerDrawer = document.querySelector('.header-drawer');
+		headerDrawer.classList.toggle('active');
+
+		setTimeout(() => {
+			headerDrawer.classList.remove('active');
+		}, 3000);
+	}
+
+	function toggleBiometricDrawer() {
+		const overlay = document.querySelector('.biometric-drawer');
+		overlay.classList.toggle('active');
+
+		// setTimeout(() => {
+		//   overlay.classList.remove('active');
+		// }, 3000);  
+	}
+
+	function hideBiometricDrawer() {
+		const overlay = document.querySelector('.biometric-drawer');
+		const content = document.querySelector('.biometric-content');
+		//	content.classList.remove('anim-popup');
+		content.classList.add('anim-popup-out');
+		//overlay.classList.add('dismiss');
+	}
+
+
+	document.addEventListener('contextmenu', event => event.preventDefault());
+
+	function animateHomeButtons() {
+		let delay = 0;
+		setTimeout(function () {
+			var boxes = document.getElementsByClassName('fade-in-delay');
+			const arr = Array.from(boxes);
+
+			arr.forEach((box) => {
+				setTimeout(function () {
+					box.classList.add('btn-animate');
+				}, (delay));
+				delay += 200;
+			});
+		}, 50);
+	}
+
+
+	function addCard(denomination, serial) {
+
+		$stackedCards = $('.stacked-cards');
+		$newCard = $('<div class="currency-notes"><img src="./assets/img/' + denomination + '.png" /><span         class="domin-' + denomination + '">' + serial + '</span></div>');
+		$stackedCards.append($newCard);
+
+	}
+
+	// $(document).ready(
+	// 	function () {
+
+	// 		function marquee(bar, speed, direction) { //main marquee function
+
+	// 			//marquee text width
+	// 			var initWidth = $(bar + " .marquee-message").width();
+
+	// 			//initial position
+	// 			$(bar + " .marquee-message").css('margin-left', function () {
+	// 				return ($(bar).width() - initWidth) / 2;
+	// 			});
+
+	// 			if (direction == 'left') { //from left to right
+	// 				//resetting the marquee element
+	// 				function resMarquee_left() {
+	// 					var left = -1 * initWidth;
+	// 					$(bar + " .marquee-message").css('margin-left', left);
+	// 				}
+
+	// 				//marquee function
+	// 				function marquee_left() {
+	// 					$(bar + " .marquee-message").css('margin-left', function (index, val) {
+	// 						return parseInt(val, 10) + speed + 'px';
+	// 					});
+
+	// 					//reset the element if it's out of it's container
+	// 					if (parseInt($(bar + " .marquee-message").css('margin-left')) > $(bar).width()) {
+	// 						resMarquee_left();
+	// 					}
+
+	// 				}
+
+	// 				setInterval(marquee_left, 10);
+
+	// 			} else { //default: from right to left
+	// 				//marquee text width
+	// 				var initWidth = $(bar + " .marquee-message").width();
+
+	// 				//initial position
+	// 				$(bar + " .marquee-message").css('margin-left', function () {
+	// 					return ($(bar).width() - initWidth) / 2;
+	// 				});
+
+	// 				//resetting the marquee element
+	// 				function resMarquee_right() {
+	// 					$(bar + " .marquee-message").css('margin-left', $(bar).width());
+	// 				}
+
+	// 				//marquee function
+	// 				function marquee_right() {
+	// 					$(bar + " .marquee-message").css('margin-left', function (index, val) {
+	// 						return parseInt(val, 10) - speed + 'px';
+	// 					});
+
+	// 					//reset the element if it's out of it's container
+	// 					if (parseInt($(bar + " .marquee-message").css('margin-left')) < -1 * $(bar + " .marquee-message").width()) {
+	// 						resMarquee_right();
+	// 					}
+	// 				}
+
+	// 				setInterval(marquee_right, 10);
+
+	// 			}
+	// 		}
+
+	// 		marquee(".marquee", 1, 'right');
+	// 		window.addEventListener('touchmove', function (e) {
+	// 			e.preventDefault();
+	// 		}, { passive: false });
+	// 	}
+	// );
+
+</script>
+
+</html>

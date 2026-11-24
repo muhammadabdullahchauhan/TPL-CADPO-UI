@@ -1,0 +1,35 @@
+<div style="height: 185px;">
+</div>
+<div style="height: 750px; overflow: hidden;">
+    <h1 class="underline" *ngIf="taggedAccounts">My Accounts</h1>
+    <br>
+    <div class="grid-container" *ngIf="taggedAccounts">
+        <ng-container *ngFor="let account of taggedAccounts.data">
+            <div class="grid-btn btn-glossy" (click)="selectAndNavigate(account.accountNo)">
+                <b>{{account.title}}</b>
+                <p>{{account.accountNo}}</p>
+                <b>PKR</b>
+            </div>
+        </ng-container>
+    </div>
+    <h1 class="underline" *ngIf="beneficiariesAccounts">Beneficiaries</h1>
+    <br>
+    <div class="grid-container" *ngIf="beneficiariesAccounts">
+        <ng-container *ngFor="let account of beneficiariesAccounts.data">
+            <div class="grid-btn btn-glossy" (click)="selectAndNavigate(account.accountNumber)">
+                <b>{{account.accountTitle}}</b>
+                <p>{{account.accountNumber}}</p>
+                <b>PKR</b>
+            </div>
+        </ng-container>
+    </div>
+</div>
+
+<div class="component-container">
+    <div class="row">
+        <button class="full-width btn-theme btn-glossy" style="width: 15%;" (click)="cancelTransaction()"><img
+                src="assets/svg/icon-home.svg" width="35px"></button>
+        <button class="full-width btn-theme btn-primary" style="width: 85%;   margin-left: 15px;"
+            (click)="continueTransaction(0)">I want to add new beneficiary</button>
+    </div>
+</div>

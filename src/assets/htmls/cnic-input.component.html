@@ -1,0 +1,52 @@
+
+<div class="container-cnic">
+    <p class="input-field-label-cnic">Please Enter Your <span class="cnic-text">CNIC</span> Number Here</p>
+</div>
+
+<div class="component-container prevent-wrapper">
+    <input type="text" class="dots-input cnic" [class.cnic-filled]="inputCNIC.value.length > 0 && inputCNIC.value.length < 15" maxlength="15" #inputCNIC placeholder="XXXXX-XXXXXXX-X" readonly>
+
+    <div class="placeholder-container cnic-instructions">
+        <div class="instruction-image"></div>
+        <div class="instruction-body">
+            <h2 class="placeholder-heading">Instructions:</h2>
+            <ul class="placeholder-list">
+                <li>Please enter 13 digits CNIC number</li>
+                <li>Do not enter expired CNIC Number</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div style="height: 230px;"></div>
+
+<div *ngIf="isScanning" class="biometric-content">
+            <div class="fingerprint"></div>
+    <div class="bio-container">
+        <b class="bio-text-eng">Place your right thumb on scanner</b>
+    </div>
+  <!-- </div> -->
+</div>
+
+<shared-numpad *ngIf="!isScanning" (typeCharacter)="typeNumeric($event)"></shared-numpad>
+
+<div class="row"></div>
+
+<div class="biometric-drawer">
+    <div class="spacer large"></div>
+    <div class="biometric-content anim-popup">
+        <div class="padded-container">
+            <div class="center-item">
+                <div class="fingerprint"></div>
+            </div>
+            <div class="spacer medium"></div>
+            <div class="center-item">
+                <h6 style="color: white;">Place your right thumb on scanner</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

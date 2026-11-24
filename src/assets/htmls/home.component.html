@@ -1,0 +1,95 @@
+<div class="home-container">
+  <!-- Top-Right Live Date & Time in clean White text -->
+  <div class="home-datetime">
+    <div class="datetime-time">{{ formattedTime }}</div>
+    <div class="datetime-date">{{ formattedDate }}</div>
+  </div>
+
+  <!-- Single Column Mode (<= 3 cards, 100% identical to original Image 1) -->
+  <div class="home-cards-wrapper cards-single-col"
+       *ngIf="cardsReady && homeCards.length <= 3">
+    <div *ngFor="let card of homeCards; let idx = index; trackBy: trackByCardType"
+         class="home-action-card"
+         [class.card-featured]="card.isFeatured"
+         [class.card-selected]="selectedCardKey === card.key"
+         [class.card-busy]="btnIsBusy"
+         [attr.data-type]="card.type"
+         [attr.data-index]="idx"
+         [style.animation-delay]="(idx * 0.12 + 0.08) + 's'"
+         (click)="btnTransaction(card.categoryType, card.actionName, card.typeId, card.isBioRequired)">
+
+      <!-- Glass Sun-Glint Shimmer Ray -->
+      <div class="card-shimmer-ray"></div>
+
+      <!-- Left Accent Neon Indicator -->
+      <div class="card-accent-pill"></div>
+
+      <!-- Icon Container with Tinted Background -->
+      <div class="card-icon-wrap" [style.background-color]="card.iconBg">
+        <img *ngIf="card.type === 'cash'" [src]="card.icon || 'assets/img/home-icons/cash.svg'" [width]="cardIconSize" [height]="cardIconSize" alt="Cash Deposit" />
+        <img *ngIf="card.type === 'cheque'" [src]="card.icon || 'assets/img/home-icons/cheque.svg'" [width]="cardIconSize" [height]="cardIconSize" alt="Cheque Deposit" />
+        <img *ngIf="card.type !== 'cash' && card.type !== 'cheque'" [src]="card.icon || 'assets/img/home-icons/bill.svg'" [width]="cardIconSize" [height]="cardIconSize" [alt]="card.title" />
+      </div>
+
+      <!-- Card Text Information -->
+      <div class="card-info">
+        <div class="card-main-title">{{ card.title }}</div>
+        <div class="card-sub-desc">{{ card.subtitle }}</div>
+      </div>
+
+      <!-- Circular Frosted Glass Arrow Button -->
+      <div class="card-arrow-wrap">
+        <div class="arrow-circle">
+          <svg class="card-arrow-svg" width="10" height="16" viewBox="0 0 11 19" fill="none">
+            <path d="M1.5 2L8.5 9.5L1.5 17" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Multi-Column Grid Mode (When > 3 cards: Clean, uniform 3-column grid with centered last card) -->
+  <div class="home-cards-wrapper cards-multi-grid"
+       *ngIf="cardsReady && homeCards.length > 3">
+    <div *ngFor="let card of homeCards; let idx = index; trackBy: trackByCardType"
+         class="home-action-card"
+         [class.card-featured]="card.isFeatured"
+         [class.card-selected]="selectedCardKey === card.key"
+         [class.card-busy]="btnIsBusy"
+         [attr.data-type]="card.type"
+         [attr.data-index]="idx"
+         [style.animation-delay]="(idx * 0.04 + 0.04) + 's'"
+         (click)="btnTransaction(card.categoryType, card.actionName, card.typeId, card.isBioRequired)">
+
+      <!-- Glass Sun-Glint Shimmer Ray -->
+      <div class="card-shimmer-ray"></div>
+
+      <!-- Left Accent Neon Indicator -->
+      <div class="card-accent-pill"></div>
+
+      <!-- Icon Container with Tinted Background -->
+      <div class="card-icon-wrap" [style.background-color]="card.iconBg">
+        <img *ngIf="card.type === 'cash'" [src]="card.icon || 'assets/img/home-icons/cash.svg'" [width]="35" [height]="35" alt="Cash Deposit" />
+        <img *ngIf="card.type === 'cheque'" [src]="card.icon || 'assets/img/home-icons/cheque.svg'" [width]="35" [height]="35" alt="Cheque Deposit" />
+        <img *ngIf="card.type !== 'cash' && card.type !== 'cheque'" [src]="card.icon || 'assets/img/home-icons/bill.svg'" [width]="35" [height]="35" [alt]="card.title" />
+      </div>
+
+      <!-- Card Text Information -->
+      <div class="card-info">
+        <div class="card-main-title">{{ card.title }}</div>
+        <div class="card-sub-desc">{{ card.subtitle }}</div>
+      </div>
+
+      <!-- Circular Frosted Glass Arrow Button -->
+      <div class="card-arrow-wrap">
+        <div class="arrow-circle">
+          <svg class="card-arrow-svg" width="9" height="15" viewBox="0 0 11 19" fill="none">
+            <path d="M1.5 2L8.5 9.5L1.5 17" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

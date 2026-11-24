@@ -1,0 +1,71 @@
+
+
+<div class="stepper-wrapper">
+  <div class="step" [ngClass]="{'active': stepCount == 0, 'completed': stepCount > 0, 'pending': stepCount < 0}">
+    <div class="circle">
+      <span *ngIf="stepCount > 0">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Enter CNIC</div>
+  </div>
+  <div class="line" [ngClass]="{'completed': stepCount > 0}"></div>
+
+  <div class="step" [ngClass]="{'active': stepCount == 1, 'completed': stepCount > 1, 'pending': stepCount < 1}">
+    <div class="circle">
+      <span *ngIf="stepCount > 1">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Account Details</div>
+  </div>
+  <div class="line" [ngClass]="{'completed': stepCount > 1}"></div>
+
+  <div class="step" [ngClass]="{'active': stepCount == 2, 'completed': stepCount > 2, 'pending': stepCount < 2}">
+    <div class="circle">
+      <span *ngIf="stepCount > 2">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Cheque Deposit</div>
+  </div>
+  <div class="line" [ngClass]="{'completed': stepCount > 2}"></div>
+
+  <div class="step" [ngClass]="{'completed': stepCount == 3}">
+    <div class="circle">
+      <span *ngIf="stepCount == 3">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Summary</div>
+  </div>
+</div>
+<div class="component-wrapper">
+
+    <app-cnic-input *ngIf="stepCount == 0" (componentResult)="updateStepper($event)"></app-cnic-input>
+    <app-ch-own-beneficiary-details *ngIf="stepCount == 1"
+      (componentResult)="updateStepper($event)"></app-ch-own-beneficiary-details>
+    <app-ch-own-review (componentResult)="updateStepper($event)" *ngIf="stepCount == 2"></app-ch-own-review>
+    <app-ch-own-result *ngIf="stepCount == 3"></app-ch-own-result>
+  </div>
+  
+   
+  <div class="footer-wrapper" *ngIf="!isHardwareBusy && stepCount !== 3">
+    <div class="footer-container" [ngStyle]="{
+        'bottom': stepCount === 0 ? '800px' :
+                  stepCount === 1 ? '775px' :
+                  stepCount === 2 ? '550px' : '550px'
+      }">
+      <button [ngClass]="{
+        'prev': onceDeposited || stepCount < 2,
+        'back': !onceDeposited && stepCount === 2
+      }" 
+      [disabled]="buttonStateDisabled"
+      (click)="(onceDeposited && stepCount >= 2) || stepCount === 1 || stepCount === 0 ? btnCancelTransaction() : btnPrev()">
+        <span *ngIf="!(onceDeposited && stepCount >= 2) && stepCount !== 1 && stepCount !== 0 && stepCount <= 3"></span>
+        <span *ngIf="(onceDeposited && stepCount >= 2) || stepCount === 1 || stepCount === 0"></span>
+      </button>
+      <button class="next" [disabled]="buttonStateDisabled" (click)="btnNext()">
+        {{ onceDeposited ? 'Complete' : 'Next' }}
+      </button>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,53 @@
+<div style="height: 50px;">
+</div>
+<div class="component-container">
+    <div class="row">
+
+        <div style="width: 100%;">
+            <p class="input-field-label">Beneficiary Account Title</p>
+            <div class="input-container prevent-wrapper">
+                <input type="text" class="input-field" [(ngModel)]="accountTitle" disabled="disabled" placeholder="Beneficiary Account Title">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div style="width: 49%;">
+            <p class="input-field-label">Beneficiary Account Number</p>
+            <div class="input-container prevent-wrapper">
+                <input type="text" class="input-field" [(ngModel)]="accountNumber"  disabled="disabled" placeholder="XXXXXXXXXXXXXXXX">
+            </div>
+        </div>
+        <div style="width: 49%;">
+            <p class="input-field-label">Amount (PKR)</p>
+            <div class="input-container active prevent-wrapper">
+                <input type="text" class="input-field" [(ngModel)]="amount" placeholder="XXXXX">
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 40px;">
+    </div>
+
+    <ng-container *ngIf="!selectingPurpose">
+        <shared-numpad  (typeCharacter)="typeNumeric($event)"></shared-numpad>
+     
+        <div class="flex-center">
+            <p>Instructions: Minimum amount should be multiple of PKR 10</p> 
+        </div>
+    </ng-container>
+
+    <ng-container  *ngIf="selectingPurpose">
+        <p class="input-field-label">Purpose of Payment</p>
+        <div class="purpose-wrapper">
+        
+            <ng-container *ngFor="let option of purposeOptions"> 
+                <div class="radio-control">
+                    <input type="radio" name="option" (change)="selectPurpose(option.id,option.purpose)" [id]="'radio--'+option.id"   />
+                    <label for="radio--{{option.id}}">{{option.purpose}}</label>
+                  </div>
+            </ng-container>
+
+        </div>
+    </ng-container>
+</div>

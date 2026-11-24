@@ -1,0 +1,54 @@
+<div style="height: 30px;"></div>
+
+<ng-container>
+    <div class="component-container">
+        <div class="flex-center">
+            <div class="header-background-color">
+                <h1 style="color: white;">Review Topup Details</h1>
+            </div>
+            <h1>Customer Details</h1>
+        </div>
+        
+
+
+        <div class="block-detail-container">
+            <div class="block-details">
+                <div class="divider"></div>
+                <div class="circle-bill-payment">
+                    <!-- <div class="arrow">→</div> -->
+                    <img src="assets/img/billing-icons/{{ topupCompany.companyCode }}.png"
+                    alt="{{ topupCompany.companyName }} Icon" class="company-logo topup">
+                </div>
+                <div class="text align-left first">
+                    Topup Amount<br>
+                    <!-- <span style="font-size: smaller;">رقم</span> -->
+                </div>
+                <div class="text align-left second">
+                    Rs. {{amount}}
+                </div>
+
+                <div class="text align-left third" *ngIf="showWalletAmount">
+                    Carry Forward Rs. {{walletAmount}}
+                </div>
+
+                <div class="text align-right first">
+                    To<br>
+                    <!-- <span style="font-size: smaller;">کو</span> -->
+                </div>
+                <div class="text align-right second">
+                    {{mobileNum}}
+                </div>
+                <div class="text align-right third">
+                    {{topupCompany.companyCode}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<div class="d-none col-md-12 col-xl-6 my-col-3">
+    <cash-acceptor (triggerCompleteTransaction)="completeTransaction()" (triggerPicture)="takePicture()"
+        (setAmount)="setCashAmount($event)" #cashAcceptor></cash-acceptor>
+</div>
+
+<div class="AddBottom"></div>

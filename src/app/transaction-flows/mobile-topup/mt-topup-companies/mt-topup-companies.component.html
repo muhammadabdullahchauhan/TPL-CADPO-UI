@@ -1,0 +1,21 @@
+<div class="overflow-hidden">
+    <div style="height: 30px;"></div>
+
+    <div class="flex-center">
+      <div class="header-background-color">
+        <h1 style="color: white;">Network Providers</h1>
+      </div>
+    </div>
+
+      <div class="billing-icon-container">
+        <ng-container *ngFor="let company of networkProviders">
+          <div class="icon companies"
+         (click)="selectCompany(company)"
+         [ngClass]="{'selected-company': selectedCompany === company}">
+         <img src="assets/img/billing-icons/{{company.companyCode}}.png" alt="{{company.companyName}} Icon">
+         <div class="icon-text">{{company.companyName}}</div>
+        </div>
+        </ng-container>
+    </div>
+
+</div>

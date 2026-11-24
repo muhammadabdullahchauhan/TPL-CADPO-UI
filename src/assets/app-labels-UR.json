@@ -1,0 +1,132 @@
+{
+    "localization": {
+        "settings": {
+            "direction": "rtl",
+            "langCode" : "UR"
+        },
+        "buttons": {
+            "yes": "ہاں",
+            "no": "نہيں",
+            "okay": "ٹھیک"
+        }
+    },
+    "home_screen": {},
+    "cnic_screen": {
+        "text_to_speech": {
+            "onload":"enter_cnic.mp3",
+            "captureBiometric": "capture_biometric.mp3"
+        },
+        "input_cnic": {
+            "label": "برائے مہربانی اپنا شناختی کارڈ نمبر درج کریں",
+            "placeholder": "e.g 42301-0815283-3",
+            "error": "فنگر پرنٹ پکڑنے میں ناکام، براہ کرم دوبارہ کوشش کریں!"
+        },
+        "labels": {
+            "authorizedDenomination": "نوٹ: فی الحال، ہم {notes} نوٹ قبول نہیں کر رہے ہیں"
+        },
+        "buttons": {
+            "accept": "آگے بڑھیں"
+        }
+    },
+    "transaction_input": {
+        "text_to_speech": {
+            "onload": "enter_details.mp3"
+        },
+        "input_account": {
+            "label": "اکاؤنٹ نمبر درج کریں",
+            "placeholder": "BBBBAAAAAAAAA"
+        },
+        "select_account": {
+            "label": "اکاؤنٹ نمبر منتخب کریں",
+            "placeholder": ""
+        },
+        "input_mobile": {
+            "label": "موبائل نمبر درج کریں",
+            "placeholder": "03XX-XXXXXXXX"
+        },
+        "input_amount": {
+            "label": "رقم درج کریں",
+            "placeholder": ""
+        },
+        "select_transaction_purpose": {
+            "label": "ٹرانزیکشن کا مقصد",
+            "placeholder": ""
+        },
+        "validation": {
+            "msg_amount_limit": "رقم {amount} روپے سے کم ہونی چاہئے۔",
+            "msg_amount_info": "درج کی گئی رقم {denomination} کے عدد میں ہونی چاہئے"
+        },
+        "buttons": {
+            "accept": "آگے بڑھیں"
+        }
+    },
+    
+    "transaction_bill_payment": {
+        "text_to_speech": {
+            "onload": "select_biller.mp3"
+        },
+        "input_account": {
+            "label": "بل کنزیومر نمبر درج کریں۔",
+            "placeholder": ""
+        },
+        "input_mobile": {
+            "label": "موبائل نمبر درج کریں",
+            "placeholder": "03XX-XXXXXXXX"
+        },
+        "labels": {
+            "sub_heading": "بلنگ کمپنی کو منتخب کریں۔"
+        }
+        ,
+        "buttons": {
+            "accept": "آگے بڑھیں"
+        }
+    }
+    ,
+    "transaction_review": {
+        "text_to_speech": {
+            "onload": "review_details.mp3",
+            "depositCash": "deposit_cash.mp3",
+            "collectedCash": "",
+            "rejectedCashSingular":  "",
+            "rejectedCashPlural":  "",
+            "cancelCash": "reject_cash.mp3",
+            "processingTransaction": "wait_processing.mp3"
+        },
+        "labels": {
+            "review_billing_detail": "بلنگ کی تفصیلات چیک کریں۔",
+            "review_transaction_detail": "ٹرانزیکشن کی تفصیلات کا جائزہ لیں",
+            "review_account_title": "اکاؤنٹ کا نام",
+            "review_account_number": "اکاؤنٹ نمبر",
+            "review_amount": "رقم",
+            "beneficiary_account": "فائدہ کار کا اکاونٹ",
+            "billed_amount": "بل کی رقم",
+            "bill_due_date" : "اخری تاریخ",
+            "billingMonth" : "بلنگ مہینہ",
+            "bill_status" : "بل کی ادائیگی",
+            "place_cash": "براہ کرم نقد رقم جمع کرنے کے لئے رکھیں",
+            "place_cheque": "براہ کرم اپنا چیک جمع کروانے کے لیے رکھیں",
+            "collected_total_amount": "روپے جمع ہو چکے ہیں {amount}",
+            "rejectedCashSingular": "ایک نوٹ مسترد کر دیا گیا ہے۔",
+            "rejectedCashPlural": "{notes} نوٹ مسترد کر دیے گئے ہیں"
+        },
+        "buttons": {
+            "add_more_cash": "مزید نقد رقم شامل کریں",
+            "cancel": "منسوخ",
+            "accept": "آگے بڑھیں",
+            "complete": "مکمل کریں"
+        }
+    },
+    "transaction_result": {
+        "text_to_speech": {
+            "collect_receipt": "recieve_slip.mp3",
+            "greeting": "thankyou_greeting.mp3"
+        },
+        "labels": {
+            "transaction_success_message": "درخواست کامیابی سے مکمل ہو گئی ہے!",
+            "transaction_error_message": "ٹرانزیکشن مکمل نہیں کی جا سکتی",
+            "transaction_number": "ٹرانزیکشن نمبر",
+            "transaction_account_title": "اکاؤنٹ کا نام",
+            "transaction_amount": "رقم"
+        }
+    }
+}

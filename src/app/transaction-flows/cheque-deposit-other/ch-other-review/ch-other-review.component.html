@@ -1,0 +1,108 @@
+<div style="height: 30px;"></div>
+
+<ng-container>
+    <div class="component-container">
+        <div class="flex-center">
+            <div class="header-background-color">
+                <h1 style="color: white;">Review Transaction Details</h1>
+            </div>
+            <h1>Beneficiary Account</h1>
+        </div>
+        
+
+
+        <div class="block-detail-container">
+            <!-- Standard Review Box (Before scan or if parsing fails) -->
+            <div class="block-details" *ngIf="!isChequeParsed || !parsedChequeData">
+                <div class="divider"></div>
+                <div class="circle">
+                    <div class="arrow">→</div>
+                </div>
+                <div class="text align-left first">
+                    Amount<br>
+                    <!-- <span style="font-size: smaller;">رقم</span> -->
+                </div>
+                <div class="text align-left second">
+                    Rs. {{amount}}
+                </div>
+
+                <div class="text align-right first">
+                    To<br>
+                    <!-- <span style="font-size: smaller;">کو</span> -->
+                </div>
+                <div class="text align-right second">
+                    {{accountTitle | titlecase}}
+                </div>
+                <div class="text align-right third">
+                    {{accountNum}}
+                </div>
+            </div>
+
+            <!-- Dynamic Parsed Cheque Review Box: Keeps same container, size, background & simplicity as the standard review box -->
+            <div class="block-details parsed-details-box" *ngIf="isChequeParsed && parsedChequeData">
+                <div class="divider"></div>
+                <div class="circle">
+                    <div class="arrow">→</div>
+                </div>
+
+                <!-- Left Side: Cheque Details directly on card background -->
+                <div class="cheque-parsed-left">
+                    <div class="ch-field" *ngIf="parsedChequeData?.cheque_number">
+                        <span class="ch-lbl">Cheque #</span>
+                        <span class="ch-val blue">{{ parsedChequeData.cheque_number | titlecase }}</span>
+                    </div>
+                    <div class="ch-field" *ngIf="parsedChequeData?.bank_name">
+                        <span class="ch-lbl">Bank</span>
+                        <span class="ch-val">{{ parsedChequeData.bank_name | titlecase }}</span>
+                    </div>
+                    <div class="ch-field full" *ngIf="parsedChequeData?.account_number">
+                        <span class="ch-lbl">Account #</span>
+                        <span class="ch-val font-mono">{{ parsedChequeData.account_number }}</span>
+                    </div>
+                    <div class="ch-field" *ngIf="parsedChequeData?.payer">
+                        <span class="ch-lbl">Payer</span>
+                        <span class="ch-val">{{ parsedChequeData.payer | titlecase }}</span>
+                    </div>
+                    <div class="ch-field" *ngIf="parsedChequeData?.payee">
+                        <span class="ch-lbl">Payee</span>
+                        <span class="ch-val">{{ parsedChequeData.payee | titlecase }}</span>
+                    </div>
+                    <div class="ch-field" *ngIf="parsedChequeData?.date">
+                        <span class="ch-lbl">Date</span>
+                        <span class="ch-val">{{ parsedChequeData.date }}</span>
+                    </div>
+                    <div class="ch-field" *ngIf="parsedChequeData?.amount_in_number">
+                        <span class="ch-lbl">Amount</span>
+                        <span class="ch-val blue">Rs. {{ parsedChequeData.amount_in_number?.toString()?.replace('/-', '') }}</span>
+                    </div>
+                    <div class="ch-field full" *ngIf="parsedChequeData?.amount_in_words">
+                        <span class="ch-lbl">Amount In Words</span>
+                        <span class="ch-val small">{{ parsedChequeData.amount_in_words | titlecase }}</span>
+                    </div>
+                </div>
+
+                <!-- Right Side: Beneficiary Details directly on card background -->
+                <div class="cheque-parsed-right">
+                    <div class="ch-field">
+                        <span class="ch-lbl">Entered Amount</span>
+                        <span class="ch-val blue amount">Rs. {{ amount }}</span>
+                    </div>
+                    <div class="ch-field">
+                        <span class="ch-lbl">To</span>
+                        <span class="ch-val">{{ accountTitle | titlecase }}</span>
+                        <span class="ch-val sub">{{ accountNum }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+<div class="cheque-review-acceptor-container">
+    <cheque-acceptor (triggerPicture)="takePicture()" (chequeAccepted)="chequeAccepted($event)"
+        (triggerCompleteTransaction)="performTransaction()" #chequeAcceptor>
+    </cheque-acceptor>
+</div>
+
+<div class="AddBottom"></div>

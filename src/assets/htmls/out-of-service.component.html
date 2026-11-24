@@ -1,0 +1,17 @@
+<div class="out-of-service-screen">
+    <div class="out-of-service-card">
+        <!-- Warning Image -->
+        <div class="warning-wrapper">
+            <div class="warning-pulse-ring"></div>
+            <img src="assets/svg/warning.svg?" alt="Warning" class="warning-icon" />
+        </div>
+
+        <!-- Heading & Message -->
+        <h1 class="out-of-service-title">{{this.heading}}</h1>
+        <h2 class="out-of-service-message">{{this.message}}</h2>
+    </div>
+</div>
+
+<!-- Supervisory Touch Zones -->
+<div class="supervisory-hotspot left-corner" (click)="hiddenClick('left')"></div>
+<div class="supervisory-hotspot right-corner" (click)="hiddenClick('right')"></div>

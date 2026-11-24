@@ -1,0 +1,134 @@
+/* ─── Keyframes ─────────────────────────────────────────────────── */
+@keyframes slideInFromLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInFromRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeUpField {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Parsed Cheque Review: Keeps exact same container size, background, and simplicity as the original block-details */
+.block-details.parsed-details-box {
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Left Side: Cheque Details directly on card background */
+.cheque-parsed-left {
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: calc(50% - 58px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  align-content: center;
+  box-sizing: border-box;
+  text-align: left;
+  animation: slideInFromLeft 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ch-field {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ch-field.full {
+  grid-column: span 2;
+}
+
+.ch-lbl {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--block-details-first-text-color, #64748B);
+  text-transform: none;
+  letter-spacing: 0.3px;
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.ch-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1E2540;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ch-val.blue {
+  color: #2E3192;
+  font-weight: 700;
+}
+
+.ch-val.font-mono {
+  font-family: monospace;
+  font-size: 12.5px;
+}
+
+.ch-val.small {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4A5568;
+}
+
+/* Right Side: Beneficiary Details directly on card background */
+.cheque-parsed-right {
+  position: absolute;
+  right: 28px;
+  top: 0;
+  bottom: 0;
+  width: calc(50% - 58px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  box-sizing: border-box;
+  text-align: right;
+  animation: slideInFromRight 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.08s;
+}
+
+/* Staggered field entries on the left panel */
+.cheque-parsed-left .ch-field:nth-child(1) { animation: fadeUpField 0.35s cubic-bezier(0.22,1,0.36,1) 0.15s both; }
+.cheque-parsed-left .ch-field:nth-child(2) { animation: fadeUpField 0.35s cubic-bezier(0.22,1,0.36,1) 0.22s both; }
+.cheque-parsed-left .ch-field:nth-child(3) { animation: fadeUpField 0.35s cubic-bezier(0.22,1,0.36,1) 0.29s both; }
+.cheque-parsed-left .ch-field:nth-child(4) { animation: fadeUpField 0.35s cubic-bezier(0.22,1,0.36,1) 0.36s both; }
+.cheque-parsed-left .ch-field:nth-child(5) { animation: fadeUpField 0.35s cubic-bezier(0.22,1,0.36,1) 0.43s both; }
+.cheque-parsed-left .ch-field:nth-child(6) { animation: fadeUpField 0.35s cubic-bezier(0.22,1,0.36,1) 0.50s both; }
+.cheque-parsed-left .ch-field:nth-child(7) { animation: fadeUpField 0.35s cubic-bezier(0.22,1,0.36,1) 0.57s both; }
+
+/* Right side fields stagger slightly later */
+.cheque-parsed-right .ch-field:nth-child(1) { animation: fadeUpField 0.38s cubic-bezier(0.22,1,0.36,1) 0.20s both; }
+.cheque-parsed-right .ch-field:nth-child(2) { animation: fadeUpField 0.38s cubic-bezier(0.22,1,0.36,1) 0.30s both; }
+
+.cheque-parsed-right .ch-lbl {
+  font-size: 13px;
+}
+
+.cheque-parsed-right .ch-val.amount {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.cheque-parsed-right .ch-val {
+  font-size: 18px;
+}
+
+.cheque-parsed-right .ch-val.sub {
+  font-size: 15px;
+  font-weight: 600;
+  color: #64748B;
+  margin-top: 3px;
+}

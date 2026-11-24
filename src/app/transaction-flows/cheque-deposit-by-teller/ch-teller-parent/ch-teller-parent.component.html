@@ -1,0 +1,75 @@
+
+
+<div class="stepper-wrapper">
+  <div class="step" [ngClass]="{'active': stepCount == 0, 'completed': stepCount > 0, 'pending': stepCount < 0}">
+    <div class="circle">
+      <span *ngIf="stepCount > 0">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Enter CNIC</div>
+  </div>
+  <div class="line" [ngClass]="{'completed': stepCount > 0}"></div>
+
+  <div class="step" [ngClass]="{'active': stepCount == 1, 'completed': stepCount > 1, 'pending': stepCount < 1}">
+    <div class="circle">
+      <span *ngIf="stepCount > 1">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Account Details</div>
+  </div>
+  <div class="line" [ngClass]="{'completed': stepCount > 1}"></div>
+
+  <div class="step" [ngClass]="{'active': stepCount == 2, 'completed': stepCount > 2, 'pending': stepCount < 2}">
+    <div class="circle">
+      <span *ngIf="stepCount > 2">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Cheque Deposit</div>
+  </div>
+  <div class="line" [ngClass]="{'completed': stepCount > 2}"></div>
+
+  <div class="step" [ngClass]="{'completed': stepCount == 3}">
+    <div class="circle">
+      <span *ngIf="stepCount == 3">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Summary</div>
+  </div>
+</div>
+<div class="component-wrapper">
+  <app-cnic-input *ngIf="stepCount == 0" (componentResult)="updateStepper($event)"></app-cnic-input>
+  <ch-other-beneficiary-detail *ngIf="stepCount == 1"
+    (componentResult)="updateStepper($event)"></ch-other-beneficiary-detail>
+  <!-- <cd-other-transaction-detail *ngIf="stepCount == 2"
+    (innerSteps)="updateInnerSteps($event)"></cd-other-transaction-detail> -->
+
+  <!-- <cd-other-deposit *ngIf="stepCount == 3"></cd-other-deposit> -->
+  <!-- <app-transaction-review (componentResult)="updateStepper($event)" *ngIf="stepCount == 3"></app-transaction-review> -->
+  <app-ch-teller-review (componentResult)="updateStepper($event)" *ngIf="stepCount == 2"></app-ch-teller-review>
+  <!-- <app-transaction-result *ngIf="stepCount == 4"></app-transaction-result> -->
+  <ch-other-result *ngIf="stepCount == 3"></ch-other-result>
+</div>
+
+ 
+<div class="footer-wrapper" *ngIf="!isHardwareBusy && stepCount !== 3">
+  <div class="footer-container" [ngStyle]="{
+      'bottom': stepCount === 0 ? '800px' :
+                stepCount === 1 ? '775px' :
+                stepCount === 2 ? '550px' : '550px'
+    }">
+    <button [ngClass]="{
+      'prev': onceDeposited || stepCount < 2,
+      'back': !onceDeposited && stepCount === 2
+    }" 
+    [disabled]="buttonStateDisabled"
+    (click)="(onceDeposited && stepCount >= 2) || stepCount === 1 || stepCount === 0 ? btnCancelTransaction() : btnPrev()">
+      <span *ngIf="!(onceDeposited && stepCount >= 2) && stepCount !== 1 && stepCount !== 0 && stepCount <= 3"></span>
+      <span *ngIf="(onceDeposited && stepCount >= 2) || stepCount === 1 || stepCount === 0"></span>
+    </button>
+    <button class="next" [disabled]="buttonStateDisabled" (click)="btnNext()">
+      {{ onceDeposited ? 'Complete' : 'Next' }}
+    </button>
+  </div>
+</div>
+
+
+
+
+
+

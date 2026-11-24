@@ -1,0 +1,1415 @@
+/* ==========================================================================
+   CADEPO – MODERN UI LAYER
+   --------------------------------------------------------------------------
+   Visual-only refresh for every transaction page, modal, dialog, spinner and
+   toast.  Loaded AFTER style.css (see angular.json "styles").
+
+   Rules of this file
+   • Home page + splash are NOT touched (no .home-* / .swiper selectors here).
+   • Only colours that already exist in the project are used (navy #1E2875,
+     orange #FF5C00, blue #334E97, green #16AB52, gold #FFB700, soft surfaces).
+   • No sizes / positions / flow-affecting properties are changed – only
+     shadows, borders, backgrounds, typography polish, states & animations.
+   ========================================================================== */
+
+:root {
+  --ui-navy: #1E2875;
+  --ui-navy-2: #2A368F;
+  --ui-navy-deep: #151D59;
+  --ui-blue: #334E97;
+  --ui-orange: #FF5C00;
+  --ui-green: #16AB52;
+  --ui-gold: #FFB700;
+  --ui-surface: #F4F6FD;
+  --ui-surface-2: #EEF2FC;
+  --ui-line: #DCE3F0;
+  --ui-muted: #7B8BA5;
+  --ui-ink: #41506B;
+
+  --ui-shadow-sm: 0 1px 2px rgba(30, 40, 117, 0.05), 0 4px 12px rgba(30, 40, 117, 0.05);
+  --ui-shadow-md: 0 2px 4px rgba(30, 40, 117, 0.05), 0 10px 28px rgba(30, 40, 117, 0.10);
+  --ui-shadow-lg: 0 4px 10px rgba(30, 40, 117, 0.06), 0 24px 56px rgba(30, 40, 117, 0.18);
+  --ui-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --------------------------------------------------------------------------
+   1. STEPPER  –  "Progress Rail": dark navy panel, segmented bars, number chips
+   (same HTML: .step > .circle + .label ; circles become the bars, lines hide)
+   -------------------------------------------------------------------------- */
+.stepper-wrapper {
+  counter-reset: ui-step;
+  justify-content: stretch !important;
+  gap: 12px !important;
+  padding: 26px 30px 18px 30px !important;
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(255, 92, 0, 0.20) 0%, rgba(255, 92, 0, 0) 45%),
+    linear-gradient(135deg, var(--ui-navy-2) 0%, var(--ui-navy) 55%, var(--ui-navy-deep) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 30px !important;
+  box-shadow: 0 6px 12px rgba(21, 29, 89, 0.18), 0 22px 44px rgba(30, 40, 117, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+}
+
+.stepper-wrapper > .line,
+.stepper-wrapper > .step-line {
+  display: none !important;
+}
+
+.stepper-wrapper .step {
+  counter-increment: ui-step;
+  flex: 1 1 0 !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0;
+  align-items: stretch !important;
+}
+
+/* the bar */
+.stepper-wrapper .step .circle {
+  width: 100% !important;
+  height: 10px !important;
+  border: none !important;
+  border-radius: 10px !important;
+  background: rgba(255, 255, 255, 0.16) !important;
+  box-shadow: none !important;
+  animation: none !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  overflow: hidden;
+  transition: background 0.5s var(--ui-ease), box-shadow 0.5s var(--ui-ease) !important;
+}
+
+.stepper-wrapper .step .circle span {
+  font-size: 0 !important;
+}
+
+.stepper-wrapper .step.completed .circle {
+  background: linear-gradient(90deg, #12B252 0%, var(--ui-green) 100%) !important;
+  box-shadow: 0 0 14px rgba(22, 171, 82, 0.45) !important;
+}
+
+.stepper-wrapper .step.active .circle {
+  background:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.38) 0 9px, rgba(255, 255, 255, 0) 9px 18px),
+    linear-gradient(90deg, var(--ui-orange) 0%, var(--ui-gold) 100%) !important;
+  background-size: 36px 100%, 100% 100% !important;
+  box-shadow: 0 0 18px rgba(255, 92, 0, 0.60) !important;
+  animation: ui-stripes 1s linear infinite !important;
+}
+
+/* label + number chip */
+.stepper-wrapper .step .label {
+  position: static !important;
+  transform: none !important;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 13px;
+  white-space: normal !important;
+  text-align: left !important;
+  text-transform: none;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.2px;
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+.stepper-wrapper .step .label::before {
+  content: counter(ui-step);
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.70);
+  background: rgba(255, 255, 255, 0.14);
+  transition: all 0.4s var(--ui-ease);
+}
+
+.stepper-wrapper .step.completed .label {
+  color: rgba(255, 255, 255, 0.90) !important;
+  font-weight: 600 !important;
+}
+
+.stepper-wrapper .step.completed .label::before {
+  content: "\2713";
+  font-size: 13px;
+  color: #FFFFFF;
+  background: var(--ui-green);
+  box-shadow: 0 3px 8px rgba(22, 171, 82, 0.45);
+}
+
+.stepper-wrapper .step.active .label {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+.stepper-wrapper .step.active .label::before {
+  color: #FFFFFF;
+  background: var(--ui-orange);
+  box-shadow: 0 0 0 4px rgba(255, 92, 0, 0.28), 0 4px 10px rgba(255, 92, 0, 0.45);
+  animation: ui-chip-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes ui-stripes {
+  from { background-position: 0 0, 0 0; }
+  to   { background-position: 36px 0, 0 0; }
+}
+
+@keyframes ui-chip-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(255, 92, 0, 0.28), 0 4px 10px rgba(255, 92, 0, 0.45); }
+  50%      { box-shadow: 0 0 0 8px rgba(255, 92, 0, 0.00), 0 4px 10px rgba(255, 92, 0, 0.45); }
+}
+
+/* --------------------------------------------------------------------------
+   2. FOOTER NAVIGATION BUTTONS  (Back / Next / Cancel / Complete)
+   -------------------------------------------------------------------------- */
+.next,
+.complete-btn {
+  background: linear-gradient(135deg, var(--ui-navy-2) 0%, var(--ui-navy) 55%, var(--ui-navy-deep) 100%) !important;
+  box-shadow: 0 10px 24px rgba(30, 40, 117, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  overflow: hidden;
+}
+
+.next::after,
+.complete-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 0%, rgba(255, 255, 255, 0.16) 50%, transparent 100%);
+  transform: skewX(-18deg);
+  animation: ui-sheen 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.next:disabled,
+.complete-btn:disabled {
+  opacity: 0.55;
+  box-shadow: none !important;
+}
+
+.next:disabled::after,
+.complete-btn:disabled::after {
+  animation: none;
+  display: none;
+}
+
+.next:active:not(:disabled),
+.complete-btn:active:not(:disabled) {
+  background: linear-gradient(135deg, var(--ui-navy) 0%, var(--ui-navy-deep) 100%) !important;
+  box-shadow: 0 3px 10px rgba(30, 40, 117, 0.28) !important;
+}
+
+.prev,
+.back,
+.cancel-btn {
+  border-color: var(--ui-navy) !important;
+  box-shadow: var(--ui-shadow-md) !important;
+}
+
+.prev:disabled,
+.back:disabled,
+.cancel-btn:disabled {
+  opacity: 0.55;
+}
+
+.addmore-btn {
+  box-shadow: 0 10px 24px rgba(54, 117, 46, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+@keyframes ui-sheen {
+  0%, 55% { left: -60%; }
+  100% { left: 140%; }
+}
+
+/* --------------------------------------------------------------------------
+   3. FORM FIELDS  –  "Icon-tile fields": icon disc, navy edge, orange focus
+   -------------------------------------------------------------------------- */
+.dots-input.account { --ui-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2875' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='5' width='20' height='14' rx='3'/%3E%3Cpath d='M2 10h20M6 15h4'/%3E%3C/svg%3E"); }
+.dots-input.amount  { --ui-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2875' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='6' width='20' height='12' rx='2'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M6 12h.01M18 12h.01'/%3E%3C/svg%3E"); }
+.dots-input.mobile  { --ui-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2875' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='7' y='2' width='10' height='20' rx='2.5'/%3E%3Cpath d='M11 18h2'/%3E%3C/svg%3E"); }
+.dots-input.toggle  { --ui-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2875' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01'/%3E%3C/svg%3E"); }
+.dots-input.cnic    { --ui-ico: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E2875' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='4' width='20' height='16' rx='3'/%3E%3Ccircle cx='9' cy='11' r='2.2'/%3E%3Cpath d='M5.5 16.5c.8-1.6 2-2.3 3.5-2.3s2.7.7 3.5 2.3M15 9h4M15 13h4'/%3E%3C/svg%3E"); }
+
+.dots-input.account,
+.dots-input.mobile,
+.dots-input.amount,
+.dots-input.toggle,
+.dots-input.cnic {
+  --ui-tile: #EEF2FC;
+  background-color: #FFFFFF !important;
+  background-image:
+    var(--ui-ico),
+    radial-gradient(circle, var(--ui-tile) 0 21px, transparent 22px),
+    linear-gradient(180deg, #FFFFFF 0%, #F8FAFF 100%) !important;
+  background-repeat: no-repeat !important;
+  background-position: 19px center, 8px center, 0 0 !important;
+  background-size: 22px 22px, 44px 44px, 100% 100% !important;
+  border: 1.5px solid var(--ui-line) !important;
+  border-radius: 22px !important;
+  color: var(--ui-navy);
+  font-weight: 700 !important;
+  letter-spacing: 0.4px;
+  padding-left: 62px !important;
+  box-shadow:
+    inset 6px 0 0 var(--ui-navy),
+    0 2px 4px rgba(30, 40, 117, 0.05),
+    0 12px 26px rgba(30, 40, 117, 0.08) !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, --ui-tile 0.25s ease !important;
+}
+
+.dots-input.cnic {
+  letter-spacing: 0.18em;
+}
+
+.flex-item.active .dots-input,
+.dots-input:focus,
+input.dots-input:focus,
+.flex-item.prevent-wrapper.active .dots-input {
+  --ui-tile: #FFE9DB;
+  border: 2px solid var(--ui-orange) !important;
+  box-shadow:
+    inset 6px 0 0 var(--ui-orange),
+    0 0 0 5px rgba(255, 92, 0, 0.14),
+    0 14px 30px rgba(255, 92, 0, 0.14) !important;
+}
+
+.dots-input:disabled {
+  --ui-tile: #E6EAF4;
+  background-color: var(--ui-surface) !important;
+  opacity: 0.75;
+  box-shadow: inset 6px 0 0 #AEB8D3, 0 2px 4px rgba(30, 40, 117, 0.04) !important;
+}
+
+/* field labels: orange tick + muted ink */
+.input-field-label.account,
+.input-field-label.mobile,
+.input-field-label.amount,
+.input-field-label.toggle {
+  color: var(--ui-ink) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.3px;
+}
+
+.input-field-label.account::before,
+.input-field-label.mobile::before,
+.input-field-label.amount::before,
+.input-field-label.toggle::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+  vertical-align: -3px;
+  background: linear-gradient(180deg, var(--ui-orange) 0%, var(--ui-gold) 100%);
+}
+
+.flex-item.active .input-field-label {
+  color: var(--ui-navy) !important;
+}
+
+/* CNIC screen */
+.input-field-label-cnic {
+  color: var(--ui-navy);
+  letter-spacing: 0.2px;
+}
+
+.cnic-text {
+  color: var(--ui-orange);
+}
+
+.placeholder-container {
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--ui-surface) 100%) !important;
+  border: 1px solid rgba(30, 40, 117, 0.08) !important;
+  box-shadow: var(--ui-shadow-sm) !important;
+}
+
+.placeholder-container .placeholder-heading {
+  color: var(--ui-navy) !important;
+}
+
+/* Fingerprint / biometric */
+.fingerprint {
+  filter: drop-shadow(0 10px 24px rgba(30, 40, 117, 0.25));
+}
+
+.bio-text-eng {
+  letter-spacing: 0.3px;
+}
+
+/* --------------------------------------------------------------------------
+   4. DROP-DOWN LISTS (purpose, account, bank, company, category)
+   -------------------------------------------------------------------------- */
+.purpose-list-wrapper,
+.account-list-wrapper {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FBFCFF 100%) !important;
+  border: 1px solid rgba(30, 40, 117, 0.10) !important;
+  box-shadow: var(--ui-shadow-lg) !important;
+}
+
+.radio-list label {
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease !important;
+}
+
+.radio-list label:hover {
+  background-color: var(--ui-surface) !important;
+}
+
+.radio-list label:active {
+  transform: scale(0.985);
+}
+
+.radio-list input[type="radio"]:checked + label {
+  background: linear-gradient(90deg, var(--ui-surface-2) 0%, #FFFFFF 100%) !important;
+  border-color: rgba(30, 40, 117, 0.14);
+}
+
+.radio-list input[type="radio"]:checked + label::before {
+  border-color: var(--ui-orange) !important;
+  background-color: var(--ui-orange) !important;
+  box-shadow: inset 0 0 0 3.5px #FFFFFF, 0 0 0 3px rgba(255, 92, 0, 0.18) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. NUMPAD  –  "Glass capsules": frosted translucent pill keys on a glass tray
+                 blue digits · orange C / X · colour-matched glow on touch
+   -------------------------------------------------------------------------- */
+.numpad .buttons {
+  position: relative;
+  isolation: isolate;
+  gap: 24px 22px !important;
+  padding: 26px 28px !important;
+  border-radius: 48px;
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.60) 0%, rgba(226, 234, 252, 0.35) 100%);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow:
+    0 34px 70px rgba(30, 40, 117, 0.16),
+    0 6px 14px rgba(30, 40, 117, 0.06),
+    inset 0 2px 4px #FFFFFF,
+    inset 0 -3px 10px rgba(51, 78, 151, 0.08);
+}
+
+/* soft colour light behind the glass so the keys have something to refract */
+.numpad .buttons::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    radial-gradient(58% 48% at 14% 8%, rgba(51, 78, 151, 0.34) 0%, rgba(51, 78, 151, 0) 70%),
+    radial-gradient(52% 44% at 92% 96%, rgba(255, 92, 0, 0.26) 0%, rgba(255, 92, 0, 0) 70%),
+    linear-gradient(145deg, #EEF2FF 0%, #DCE5FA 100%);
+}
+
+.numpad button.btn {
+  width: 134px !important;
+  height: 90px !important;
+  padding: 0 !important;
+  border-radius: 45px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.30) 100%) !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--ui-blue) !important;
+  font-size: 35px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  box-shadow:
+    0 14px 26px rgba(30, 40, 117, 0.14),
+    0 2px 4px rgba(30, 40, 117, 0.06),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -12px 20px rgba(120, 150, 255, 0.16) !important;
+  transition: transform 0.55s var(--ui-ease), box-shadow 0.55s ease, background 0.55s ease, border-color 0.55s ease, color 0.55s ease !important;
+}
+
+/* touch: glass lights up in the digit colour (blue). Only :active is used (no
+   :hover) so nothing stays lit on touch screens; it fades out smoothly. */
+.numpad .buttons .btn:active {
+  transition-duration: 0.07s !important;
+  transform: translateY(1px) scale(0.97) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0%, rgba(205, 220, 255, 0.55) 100%) !important;
+  border-color: rgba(140, 165, 245, 0.90) !important;
+  color: var(--ui-navy) !important;
+  border-radius: 45px !important;
+  box-shadow:
+    0 0 0 3px rgba(80, 115, 235, 0.22),
+    0 10px 34px rgba(51, 78, 151, 0.50),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -14px 22px rgba(80, 120, 255, 0.40) !important;
+}
+
+/* delete (X): orange icon drawn from the original image */
+.numpad .delete img {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.numpad .delete::before {
+  content: "";
+  width: 32px;
+  height: 32px;
+  background: var(--ui-orange);
+  -webkit-mask: url('../img/delete.png') center / contain no-repeat;
+  mask: url('../img/delete.png') center / contain no-repeat;
+}
+
+/* clear (C): orange text on a warm glass key */
+.numpad .clear {
+  color: var(--ui-orange) !important;
+  font-size: 32px !important;
+  font-weight: 700 !important;
+}
+
+.numpad .delete,
+.numpad .clear {
+  background: linear-gradient(180deg, rgba(255, 250, 245, 0.85) 0%, rgba(255, 205, 165, 0.34) 100%) !important;
+  border-color: rgba(255, 240, 228, 0.98) !important;
+  box-shadow:
+    0 14px 26px rgba(255, 92, 0, 0.14),
+    0 2px 4px rgba(30, 40, 117, 0.05),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -12px 20px rgba(255, 140, 60, 0.20) !important;
+}
+
+/* touch for the orange keys: glow turns orange (fast in, slow smooth fade out) */
+.numpad .buttons .delete:active,
+.numpad .buttons .clear:active,
+.numpad .buttons .delete.active {
+  transition-duration: 0.07s !important;
+  background: linear-gradient(180deg, rgba(255, 252, 248, 0.95) 0%, rgba(255, 190, 140, 0.60) 100%) !important;
+  border-color: rgba(255, 170, 110, 0.95) !important;
+  color: #E04F00 !important;
+  box-shadow:
+    0 0 0 3px rgba(255, 110, 30, 0.24),
+    0 10px 34px rgba(255, 92, 0, 0.52),
+    inset 0 2px 3px #FFFFFF,
+    inset 0 -14px 22px rgba(255, 110, 30, 0.42) !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. REVIEW SCREENS (summary card + banner)
+   -------------------------------------------------------------------------- */
+.header-background-color {
+  background: linear-gradient(120deg, var(--ui-navy-2) 0%, var(--ui-navy) 60%, var(--ui-navy-deep) 100%) !important;
+  box-shadow: 0 12px 28px rgba(30, 40, 117, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+
+.header-background-color::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ui-orange) 0%, var(--ui-gold) 100%);
+}
+
+.header-background-color h1 {
+  letter-spacing: 0.4px;
+}
+
+.flex-center h1 {
+  color: var(--ui-navy);
+  letter-spacing: 0.2px;
+}
+
+.block-details {
+  background:
+    linear-gradient(90deg, var(--ui-navy) 0%, var(--ui-blue) 60%, var(--ui-orange) 100%) top / 100% 4px no-repeat,
+    linear-gradient(145deg, #FFFFFF 0%, var(--ui-surface) 100%) !important;
+  border: 1px solid rgba(30, 40, 117, 0.08) !important;
+  box-shadow: var(--ui-shadow-md), inset 0 1px 0 #FFFFFF !important;
+}
+
+.block-details .divider {
+  background: linear-gradient(180deg, transparent 0%, rgba(30, 40, 117, 0.16) 20%, rgba(30, 40, 117, 0.16) 80%, transparent 100%) !important;
+}
+
+.block-details .circle {
+  background: linear-gradient(145deg, var(--ui-navy-2) 0%, var(--ui-navy) 100%) !important;
+  border: 3px solid #FFFFFF !important;
+  box-shadow: 0 6px 16px rgba(30, 40, 117, 0.30) !important;
+}
+
+.block-details .arrow {
+  color: #FFFFFF !important;
+}
+
+.block-details .text.first {
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+  color: var(--ui-muted) !important;
+}
+
+.block-details .text.second {
+  color: var(--ui-navy) !important;
+  font-weight: 700;
+}
+
+.verification-notice-card {
+  border-radius: 20px;
+  box-shadow: var(--ui-shadow-sm);
+}
+
+/* --------------------------------------------------------------------------
+   7. RESULT SCREENS
+   -------------------------------------------------------------------------- */
+.transaction-box {
+  box-shadow: 0 4px 10px rgba(30, 40, 117, 0.06), 0 24px 56px rgba(30, 40, 117, 0.14) !important;
+}
+
+.transaction-box::before {
+  animation-duration: 5s !important;
+}
+
+.result-status-img {
+  filter: drop-shadow(0 12px 22px rgba(30, 40, 117, 0.18));
+}
+
+.transaction-detail {
+  color: var(--ui-muted) !important;
+  letter-spacing: 0.2px;
+}
+
+.print-btn,
+.green-btn {
+  border-radius: 24px !important;
+}
+
+.print-btn {
+  box-shadow: var(--ui-shadow-sm) !important;
+}
+
+.print-btn:hover:not(:disabled) {
+  box-shadow: var(--ui-shadow-md) !important;
+}
+
+.green-btn {
+  box-shadow: 0 1px 2px rgba(22, 163, 74, 0.06), 0 6px 18px rgba(22, 163, 74, 0.10) !important;
+}
+
+.pending-verification-card {
+  border-radius: 18px !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. CASH / CHEQUE ACCEPTOR
+   -------------------------------------------------------------------------- */
+.denomination-container .item {
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--ui-surface) 100%);
+  border: 1px solid rgba(30, 40, 117, 0.08);
+  border-radius: 14px;
+  box-shadow: var(--ui-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.denomination-container .item.highlight-orange {
+  border-color: rgba(255, 92, 0, 0.35);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF3EB 100%);
+  box-shadow: 0 6px 16px rgba(255, 92, 0, 0.16);
+}
+
+.cash-deposit-gif,
+.cheque-deposit-gif,
+.cheque-entry-gif {
+  filter: drop-shadow(0 14px 26px rgba(30, 40, 117, 0.16));
+}
+
+.cheque-image-frame {
+  border: 1px solid rgba(30, 40, 117, 0.10);
+  box-shadow: var(--ui-shadow-md);
+}
+
+.cheque-scanning-overlay {
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.simulate-claim-btn {
+  box-shadow: var(--ui-shadow-md) !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. HEADER CONTROLS ON TRANSACTION SCREENS (exit + pending cash pill)
+   -------------------------------------------------------------------------- */
+.header-wrapper.right-content .dropdown-clip {
+  background: linear-gradient(145deg, var(--ui-navy-2) 0%, var(--ui-navy) 100%) !important;
+  box-shadow: 0 8px 20px rgba(30, 40, 117, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transition: transform 0.2s var(--ui-ease), box-shadow 0.2s ease !important;
+}
+
+.header-wrapper.right-content .dropdown-clip:active {
+  transform: scale(0.93);
+}
+
+.tx-wallet-btn {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FFF8F3 100%) !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. MODAL / POPUP  (ModalInterfaceComponent + cash-stuck dialog)
+   -------------------------------------------------------------------------- */
+.modal-container {
+  background: radial-gradient(120% 120% at 50% 0%, rgba(30, 40, 117, 0.55) 0%, rgba(10, 16, 48, 0.78) 100%) !important;
+  -webkit-backdrop-filter: blur(7px) !important;
+  backdrop-filter: blur(7px) !important;
+}
+
+.modal-content {
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFBFF 100%) !important;
+  border-radius: 32px !important;
+  box-shadow: 0 8px 16px rgba(10, 16, 48, 0.10), 0 40px 90px -10px rgba(10, 16, 48, 0.50), 0 0 0 1px rgba(30, 40, 117, 0.06) !important;
+  overflow: hidden;
+}
+
+.modal-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--ui-navy) 0%, var(--ui-blue) 55%, var(--ui-orange) 100%);
+}
+
+.modal-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 124px;
+  height: 124px;
+  margin: 4px auto 10px auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, #FFFFFF 0%, var(--ui-surface-2) 100%);
+  box-shadow: inset 0 0 0 1px rgba(30, 40, 117, 0.06), 0 12px 28px rgba(30, 40, 117, 0.12);
+  animation: ui-icon-pop 0.5s var(--ui-ease) both;
+}
+
+.modal-content h1 {
+  -webkit-text-fill-color: var(--ui-navy) !important;
+  color: var(--ui-navy) !important;
+  letter-spacing: -0.2px;
+}
+
+.modal-content p {
+  color: var(--ui-ink) !important;
+}
+
+.btn-modal-info,
+.btn-modal-right {
+  background: linear-gradient(135deg, var(--ui-navy-2) 0%, var(--ui-navy) 60%, var(--ui-navy-deep) 100%) !important;
+  box-shadow: 0 12px 26px rgba(30, 40, 117, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+  border-radius: 20px !important;
+  letter-spacing: 0.4px;
+}
+
+.btn-modal-left {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F3F5FB 100%) !important;
+  border: 1.5px solid rgba(30, 40, 117, 0.18) !important;
+  color: var(--ui-navy) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--ui-shadow-sm);
+}
+
+.btn-modal-info:active,
+.btn-modal-right:active {
+  box-shadow: 0 4px 12px rgba(30, 40, 117, 0.25) !important;
+}
+
+.modal-container.spinner {
+  background: rgba(244, 246, 253, 0.80) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+/* Cash-stuck assistance dialog keeps its own header; skip accent bar there */
+.cash-stuck-dialog-panel .modal-content::before {
+  display: none;
+}
+
+/* Angular Material / CDK overlays */
+.cdk-overlay-dark-backdrop {
+  background: rgba(10, 16, 48, 0.55) !important;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+/* --------------------------------------------------------------------------
+   11. LOADER / SPINNER (component styles are scoped, hence !important)
+   -------------------------------------------------------------------------- */
+.kiosk-loader-backdrop {
+  background: radial-gradient(100% 100% at 50% 40%, rgba(255, 255, 255, 0.72) 0%, rgba(238, 242, 252, 0.88) 100%) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.kiosk-loader-content {
+  background: #FFFFFF;
+  padding: 34px 54px 30px 54px;
+  border-radius: 32px;
+  border: 1px solid rgba(30, 40, 117, 0.07);
+  box-shadow: 0 6px 14px rgba(30, 40, 117, 0.06), 0 28px 64px rgba(30, 40, 117, 0.16);
+}
+
+.loader-message {
+  color: var(--ui-navy) !important;
+  letter-spacing: 0.3px !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. TOASTS (Material snack-bar + SweetAlert2 toasts)
+   -------------------------------------------------------------------------- */
+.mat-snack-bar-container,
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  background: linear-gradient(135deg, var(--ui-navy-2) 0%, var(--ui-navy) 100%) !important;
+  color: #FFFFFF !important;
+  border-radius: 18px !important;
+  border-left: 5px solid var(--ui-orange) !important;
+  box-shadow: 0 14px 34px rgba(10, 16, 48, 0.35) !important;
+  font-family: var(--defaultFont) !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+}
+
+.mat-simple-snackbar-action .mat-button-wrapper,
+.mat-mdc-snack-bar-action {
+  color: var(--ui-gold) !important;
+  font-weight: 700 !important;
+}
+
+.swal2-popup {
+  border-radius: 28px !important;
+  font-family: var(--defaultFont) !important;
+  box-shadow: var(--ui-shadow-lg) !important;
+}
+
+.swal2-title {
+  color: var(--ui-navy) !important;
+}
+
+.swal2-styled.swal2-confirm {
+  background: linear-gradient(135deg, var(--ui-navy-2) 0%, var(--ui-navy) 100%) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 20px rgba(30, 40, 117, 0.28) !important;
+}
+
+.swal2-styled.swal2-cancel {
+  border-radius: 16px !important;
+}
+
+.swal2-toast {
+  border-left: 5px solid var(--ui-orange) !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. ENTRANCE MOTION
+   Opacity only on purpose: a transform would create a containing block for
+   the position:fixed buttons that live inside transaction components.
+   -------------------------------------------------------------------------- */
+.component-wrapper > * {
+  animation: ui-fade 0.45s ease backwards;
+}
+
+@keyframes ui-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes ui-icon-pop {
+  0%   { transform: scale(0.7); opacity: 0; }
+  70%  { transform: scale(1.06); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .next::after,
+  .complete-btn::after,
+  .component-wrapper > *,
+  .modal-icon-wrapper {
+    animation: none !important;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   14. KIOSK LAYOUT ANCHORING  (fix: footer buttons riding over the keypad)
+   --------------------------------------------------------------------------
+   Page content (stepper, fields, keypad) flows from the TOP of the screen, but
+   the footer / action buttons were pinned with a fixed "bottom: Npx" taken from
+   the viewport.  On a kiosk taller than the design (768x1366) they slid down
+   onto the keypad and the bottom-curve + dots artwork.
+   Every fixed button below is re-anchored from the TOP instead, at the same
+   spot the design intended, so the screen height no longer matters.
+   Matching is done on the inline "bottom" value each parent template sets.
+   -------------------------------------------------------------------------- */
+.footer-container[style*="bottom: 800px"] { top: 567px !important; bottom: auto !important; }  /* CNIC step      */
+.footer-container[style*="bottom: 775px"] { top: 569px !important; bottom: auto !important; }  /* details + keypad */
+.footer-container[style*="bottom: 715px"] { top: 640px !important; bottom: auto !important; }
+.footer-container[style*="bottom: 705px"] { top: 650px !important; bottom: auto !important; }
+.footer-container[style*="bottom: 550px"] { top: 805px !important; bottom: auto !important; }  /* review / result  */
+.footer-container[style*="bottom: 190px"] { top: 1165px !important; bottom: auto !important; } /* list screens     */
+
+.cancel-btn,
+.addmore-btn,
+.simulate-claim-wrapper {
+  top: 1040px !important;
+  bottom: auto !important;
+}
+
+.complete-btn {
+  top: 1150px !important;
+  bottom: auto !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   15. CASH DEPOSIT REVIEW  –  everything under the "Beneficiary Account" title
+       summary card · collected / rejected pills · denomination tiles ·
+       action buttons · banknote slot
+   -------------------------------------------------------------------------- */
+
+/* --- 15a. Summary card: warm "Amount" side  →  cool "Beneficiary" side ---- */
+.block-details {
+  background:
+    linear-gradient(90deg, #FFF3EA 0%, #FFFBF8 100%) left / 50% 100% no-repeat,
+    linear-gradient(270deg, #E9EEFB 0%, #F8FAFF 100%) right / 50% 100% no-repeat,
+    #FFFFFF !important;
+  border: 1px solid rgba(30, 40, 117, 0.08) !important;
+  border-radius: 32px !important;
+  box-shadow:
+    inset 8px 0 0 var(--ui-orange),
+    inset -8px 0 0 var(--ui-navy),
+    0 2px 4px rgba(30, 40, 117, 0.05),
+    0 22px 48px rgba(30, 40, 117, 0.13) !important;
+}
+
+.block-details .divider {
+  background: repeating-linear-gradient(180deg, rgba(30, 40, 117, 0.22) 0 6px, transparent 6px 13px) !important;
+  width: 2px !important;
+}
+
+.block-details .circle {
+  box-shadow: 0 0 0 9px rgba(255, 255, 255, 0.95), 0 12px 26px rgba(30, 40, 117, 0.34) !important;
+}
+
+.block-details .text.first {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1.6px !important;
+  text-transform: uppercase;
+}
+
+.block-details .text.align-left.first  { color: var(--ui-orange) !important; }
+.block-details .text.align-right.first { color: var(--ui-blue) !important; }
+
+.block-details .text.align-left.second {
+  color: var(--ui-navy) !important;
+  font-size: 34px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.3px;
+}
+
+.block-details .text.align-right.second {
+  color: var(--ui-navy) !important;
+  font-size: 27px !important;
+  font-weight: 800 !important;
+}
+
+.block-details .text.third {
+  color: var(--ui-ink) !important;
+  font-size: 19px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.2px;
+}
+
+/* --- 15b. Collected / rejected pills ------------------------------------- */
+.inline-container {
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  margin-top: 34px !important;
+}
+
+.inline-container p {
+  position: relative !important;
+  padding: 13px 22px 13px 56px !important;
+  border-radius: 20px !important;
+  font-family: var(--defaultFont) !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.2px;
+}
+
+.inline-container p::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 30px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.inline-container p.align-left {
+  color: #0C7A39 !important;
+  background: linear-gradient(135deg, #F2FCF6 0%, #E2F6EA 100%);
+  border: 1.5px solid rgba(22, 171, 82, 0.30);
+  box-shadow: 0 8px 20px rgba(22, 171, 82, 0.10);
+}
+
+.inline-container p.align-left::before {
+  content: "\2713";
+  background: linear-gradient(145deg, #1FC265 0%, var(--ui-green) 100%);
+  box-shadow: 0 4px 10px rgba(22, 171, 82, 0.40);
+}
+
+.inline-container p.align-right {
+  color: #C24400 !important;
+  background: linear-gradient(135deg, #FFF8F3 0%, #FFEADB 100%);
+  border: 1.5px solid rgba(255, 92, 0, 0.32);
+  box-shadow: 0 8px 20px rgba(255, 92, 0, 0.10);
+}
+
+.inline-container p.align-right::before {
+  content: "!";
+  background: linear-gradient(145deg, #FF7A2E 0%, var(--ui-orange) 100%);
+  box-shadow: 0 4px 10px rgba(255, 92, 0, 0.40);
+}
+
+/* --- 15c. Denomination tiles -------------------------------------------- */
+.denomination-container {
+  height: auto !important;
+  gap: 8px !important;
+  margin-top: 22px !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+.denomination-container .item {
+  height: 70px;
+  min-width: 0;
+  padding: 0 2px !important;
+  border: 1.5px solid #E1E7F3 !important;
+  border-radius: 20px !important;
+  background: linear-gradient(180deg, #FFFFFF 0%, #F5F7FD 100%) !important;
+  box-shadow: 0 6px 14px rgba(30, 40, 117, 0.06) !important;
+  color: #8A97AE !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.denomination-container .item:first-child {
+  border-left: 1.5px solid #E1E7F3 !important;
+}
+
+.denomination-container .item.highlight-orange {
+  background: linear-gradient(160deg, #FF7A2E 0%, var(--ui-orange) 100%) !important;
+  border-color: #E85600 !important;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  box-shadow: 0 12px 24px rgba(255, 92, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.30) !important;
+  transform: translateY(-4px);
+}
+
+/* --- 15d. Action buttons ------------------------------------------------- */
+.addmore-btn {
+  background:
+    url('../img/add-more-cash.png') 24px center no-repeat,
+    linear-gradient(135deg, #46963C 0%, #36752E 55%, #2B5E25 100%) !important;
+  box-shadow: 0 14px 28px rgba(54, 117, 46, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+  overflow: hidden !important;
+  letter-spacing: 0.8px !important;
+}
+
+.addmore-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 0%, rgba(255, 255, 255, 0.18) 50%, transparent 100%);
+  transform: skewX(-18deg);
+  animation: ui-sheen 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.complete-btn::before {
+  content: "\203A";
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  width: 46px;
+  height: 46px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  line-height: 44px;
+  text-align: center;
+}
+
+/* --- 15e. Bottom artwork + banknote slot: both pinned to the SCREEN BOTTOM -
+   The curve/dots artwork (bg svg 768x1366) is scaled to the screen width and
+   aligned to the bottom, and the .AddBottom strip is the same artwork stretched
+   to the same scale, so the two always line up.  The banknotes sit in the slot
+   behind that strip.  Scoped to transaction pages only (they own a stepper),
+   so home / splash / out-of-service keep their existing background.         */
+body:has(.stepper-wrapper),
+body:has(app-thank-you),
+body:has(app-out-of-service) {
+  background-color: #FFFFFF;
+  background-image: url('../svg/background.svg') !important;
+  background-repeat: no-repeat !important;
+  background-position: center bottom !important;
+  background-size: 100% auto !important;
+}
+
+.AddBottom {
+  top: auto !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: calc(100vw * 101 / 768) !important;
+  background-size: 100% 100% !important;
+  background-position: center bottom !important;
+  pointer-events: none !important;   /* never block taps on buttons */
+}
+
+.stacked-cards {
+  top: auto !important;
+  bottom: calc(100vw * 38 / 768) !important;
+  /* horizontally centred on the screen */
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto !important;
+  width: min(890px, 100%) !important;
+  pointer-events: none !important;
+}
+
+/* every note sits dead-centre inside the slot (the existing 80% width is kept) */
+.stacked-cards .currency-notes {
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto !important;
+}
+
+.currency-notes img {
+  border-radius: 10px;
+  filter: drop-shadow(0 10px 18px rgba(30, 40, 117, 0.25));
+}
+
+
+/* --------------------------------------------------------------------------
+   16. RESULT / SUMMARY CARD  –  "Receipt ticket"
+       status panel · perforated divider with notches · amount highlight
+   -------------------------------------------------------------------------- */
+.transaction-box {
+  contain: none !important;
+  clip-path: none !important;
+  overflow: hidden !important;
+  background: #FFFFFF !important;
+  border-radius: 32px !important;
+  padding: 0 0 20px 0 !important;
+  box-shadow: 0 4px 10px rgba(30, 40, 117, 0.06), 0 28px 60px rgba(30, 40, 117, 0.16) !important;
+}
+
+/* top accent bar replaces the rotating border beam */
+.transaction-box::before {
+  content: '' !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 7px !important;
+  background: linear-gradient(90deg, var(--ui-navy) 0%, var(--ui-blue) 55%, var(--ui-orange) 100%) !important;
+  animation: none !important;
+  transform: none !important;
+  z-index: 4 !important;
+}
+
+.transaction-box::after {
+  inset: 0 !important;
+  border-radius: 32px !important;
+}
+
+/* status panel */
+.transaction-box .result-status-section {
+  margin: 0 !important;
+  padding: 34px 28px 24px 28px !important;
+  background:
+    radial-gradient(90% 120% at 50% 0%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #E9EEFB 0%, #F6F8FE 100%);
+}
+
+.transaction-box .result-status-img {
+  width: 112px !important;
+  padding: 10px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.65), 0 14px 30px rgba(30, 40, 117, 0.16);
+  margin-bottom: 14px !important;
+}
+
+.transaction-box .result-status-msg {
+  font-size: 23px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.1px !important;
+}
+
+/* details list with perforation */
+.transaction-box .transaction-details-list {
+  position: relative;
+  margin: 26px 34px 0 34px !important;
+  width: auto !important;
+  padding-top: 8px !important;
+  border-top: 2px dashed #CBD4EA !important;
+}
+
+.transaction-box .transaction-details-list::before,
+.transaction-box .transaction-details-list::after {
+  content: "";
+  position: absolute;
+  top: -14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: inset 0 0 0 1px rgba(30, 40, 117, 0.10);
+}
+
+.transaction-box .transaction-details-list::before { left: -47px; }
+.transaction-box .transaction-details-list::after  { right: -47px; }
+
+.transaction-box .transaction-detail {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase;
+  color: var(--ui-muted) !important;
+  padding: 15px 4px !important;
+  border-bottom: 1px solid #EDF0F8 !important;
+}
+
+.transaction-box .transaction-detail span {
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.2px !important;
+  text-transform: none;
+  color: var(--ui-navy) !important;
+}
+
+/* Print Receipt / Go Green: solid, confident buttons */
+.print-btn,
+.green-btn {
+  border: none !important;
+  overflow: hidden !important;
+}
+
+.print-btn {
+  background: linear-gradient(135deg, var(--ui-navy-2) 0%, var(--ui-navy) 55%, var(--ui-navy-deep) 100%) !important;
+  box-shadow: 0 12px 26px rgba(30, 40, 117, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+
+.green-btn {
+  background: linear-gradient(135deg, #1FC265 0%, var(--ui-green) 55%, #0F8A41 100%) !important;
+  box-shadow: 0 12px 26px rgba(22, 171, 82, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.22) !important;
+}
+
+.print-btn .btn-text,
+.green-btn .btn-text {
+  color: #FFFFFF !important;
+}
+
+.print-btn .print-icon,
+.green-btn .green-icon {
+  filter: brightness(0) invert(1) !important;
+}
+
+.print-btn::after,
+.green-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 0%, rgba(255, 255, 255, 0.20) 50%, transparent 100%);
+  transform: skewX(-18deg);
+  animation: ui-sheen 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.print-btn:hover:not(:disabled),
+.green-btn:hover:not(:disabled) {
+  background-color: transparent !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   17. RESULT CARD v2  –  "Midnight receipt"
+       dark glass card · glowing status ring · hero amount · glass detail panel
+   -------------------------------------------------------------------------- */
+.transaction-box {
+  background:
+    radial-gradient(70% 55% at 100% 0%, rgba(255, 92, 0, 0.38) 0%, rgba(255, 92, 0, 0) 65%),
+    radial-gradient(60% 45% at 0% 100%, rgba(51, 78, 151, 0.55) 0%, rgba(51, 78, 151, 0) 70%),
+    linear-gradient(160deg, var(--ui-navy-2) 0%, var(--ui-navy) 45%, #12184A 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 38px !important;
+  padding: 0 0 26px 0 !important;
+  box-shadow: 0 10px 20px rgba(21, 29, 89, 0.20), 0 40px 80px rgba(30, 40, 117, 0.34) !important;
+}
+
+.transaction-box::before {
+  height: 6px !important;
+  background: linear-gradient(90deg, var(--ui-orange) 0%, var(--ui-gold) 100%) !important;
+}
+
+/* fine dot texture */
+.transaction-box::after {
+  inset: 0 !important;
+  border-radius: 38px !important;
+  background: radial-gradient(rgba(255, 255, 255, 0.07) 1.2px, transparent 1.5px) 0 0 / 18px 18px !important;
+}
+
+/* status */
+.transaction-box .result-status-section {
+  padding: 40px 28px 6px 28px !important;
+  background: transparent !important;
+}
+
+.transaction-box .result-status-img {
+  width: 116px !important;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow:
+    0 0 0 10px rgba(255, 255, 255, 0.10),
+    0 0 0 22px rgba(255, 255, 255, 0.05),
+    0 18px 40px rgba(0, 0, 0, 0.30);
+  margin-bottom: 20px !important;
+}
+
+.transaction-box .result-status-msg {
+  color: #FFFFFF !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  opacity: 0.96;
+}
+
+/* glass details panel */
+.transaction-box .transaction-details-list {
+  display: flex !important;
+  flex-direction: column;
+  margin: 24px 26px 0 26px !important;
+  padding: 6px 24px 10px 24px !important;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 28px !important;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.transaction-box .transaction-details-list::before,
+.transaction-box .transaction-details-list::after {
+  display: none !important;
+}
+
+.transaction-box .transaction-detail {
+  color: rgba(255, 255, 255, 0.62) !important;
+  font-size: 14px !important;
+  letter-spacing: 1.3px !important;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.16) !important;
+}
+
+.transaction-box .transaction-detail:last-child {
+  border-bottom: none !important;
+}
+
+.transaction-box .transaction-detail span {
+  color: #FFFFFF !important;
+  font-size: 19px !important;
+  font-weight: 700 !important;
+}
+
+/* hero amount: first thing inside the panel */
+.transaction-box .transaction-detail.amount-row {
+  order: -1;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4px;
+  margin: 0 0 6px 0 !important;
+  padding: 22px 0 22px 0 !important;
+  border-bottom: 2px dashed rgba(255, 255, 255, 0.30) !important;
+  color: var(--ui-gold) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  letter-spacing: 3px !important;
+  text-align: center !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+
+.transaction-box .transaction-detail.amount-row span {
+  max-width: 100% !important;
+  text-align: center !important;
+  font-size: 54px !important;
+  font-weight: 800 !important;
+  letter-spacing: -1px !important;
+  line-height: 1.1;
+  color: #FFFFFF !important;
+  text-shadow: 0 6px 26px rgba(255, 92, 0, 0.50);
+}
+
+/* --------------------------------------------------------------------------
+   18. CNIC INPUT STATES
+       empty → blue · typing (1–14 chars) → orange · complete (15) → blue
+   (.cnic-filled is toggled by a class binding in cnic-input.component.html)
+   -------------------------------------------------------------------------- */
+.dots-input.cnic.cnic-filled {
+  --ui-tile: #FFE9DB;
+  border: 2px solid var(--ui-orange) !important;
+  box-shadow:
+    inset 6px 0 0 var(--ui-orange),
+    0 0 0 5px rgba(255, 92, 0, 0.14),
+    0 14px 30px rgba(255, 92, 0, 0.14) !important;
+}

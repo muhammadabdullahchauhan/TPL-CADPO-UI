@@ -1,0 +1,37 @@
+<div class="transparent-overlay"></div>
+
+<div class="result-container">
+  <div class="transaction-box-wrapper">
+    <div class="transaction-box">
+      <div class="result-status-section">
+        <img *ngIf="isCashStuck" src="assets/img/pending.gif" class="result-status-img" alt="Claim Submitted" />
+        <img *ngIf="!isCashStuck && isSuccess" src="assets/img/success.gif" class="result-status-img" alt="Success" />
+        <img *ngIf="!isCashStuck && !isSuccess" src="assets/img/diag_icon_error.png" class="result-status-img" alt="Error" />
+
+        <p *ngIf="isCashStuck" class="result-status-msg">Thank You. Your Claim has been submitted.</p>
+        <p *ngIf="!isCashStuck && isSuccess" class="result-status-msg">Your transaction has been completed successfully!</p>
+        <p *ngIf="!isCashStuck && !isSuccess" class="result-status-msg">Your transaction could not be completed.</p>
+      </div>
+
+      <div class="transaction-details-list">
+        <p class="transaction-detail">Transaction # <span>{{ transactionNumber }}</span></p>
+        <p class="transaction-detail">Account Title <span>{{ accountTitle | titlecase }}</span></p>
+        <p class="transaction-detail">Account Number <span>{{ accountNumber }}</span></p>
+        <p class="transaction-detail amount-row">Amount <span>Rs. {{ amount }}</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-buttons" *ngIf="isSuccess && areButtonsVisible && !isCashStuck">
+    <button [disabled]="btnIsBusy" [class.btn-active-pressed]="activeBtn === 'print'" class="print-btn" (click)="printCommand()">
+      <span class="print-icon"></span>
+      <span class="btn-text">Print Receipt</span>
+    </button>
+    <button [disabled]="btnIsBusy" [class.btn-active-pressed]="activeBtn === 'green'" class="green-btn" (click)="skipPrint()">
+      <span class="green-icon"></span>
+      <span class="btn-text">Go Green</span>
+    </button>
+  </div>
+</div>
+
+

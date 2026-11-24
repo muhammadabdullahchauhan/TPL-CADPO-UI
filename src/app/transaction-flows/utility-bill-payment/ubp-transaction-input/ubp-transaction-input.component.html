@@ -1,0 +1,41 @@
+<div style="height: 15px;"></div>
+
+<div class="transaction-input-header">
+  <h1 class="transaction-input-title">Pay <span>{{ billingCategory }}</span> Bill</h1>
+  <div class="transaction-input-logo" *ngIf="billingCompany?.companyCode">
+    <img [src]="'assets/img/billing-icons/' + billingCompany.companyCode + '.png'"
+         [alt]="billingCompany.companyName + ' Icon'">
+  </div>
+</div>
+
+<div class="ubp-inputs-wrapper">
+    <!-- Field 1: Account / Consumer # -->
+    <div class="ubp-field-group" [ngClass]="{'active': selectedField == 'account'}" (click)="focusField('account')">
+        <label class="ubp-field-label">Account/Consumer #</label>
+        <div class="ubp-input-box">
+            <input type="text" class="dots-input ubp-input" id="account" maxlength="16" #inputAccount placeholder="XXXXXXXXXXXX">
+        </div>
+    </div>
+
+    <!-- Field 2: Enter Mobile Number -->
+    <div class="ubp-field-group" [ngClass]="{'active': selectedField == 'mobile'}" (click)="focusField('mobile')">
+        <label class="ubp-field-label">Enter Mobile Number</label>
+        <div class="ubp-input-box">
+            <input type="text" class="dots-input ubp-input" maxlength="11" #inputMobile placeholder="03XXXXXXXXX">
+        </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="ubp-instructions">
+        <h2 class="ubp-instructions-heading">Instructions:</h2>
+        <ul class="ubp-instructions-list">
+            <li>Enter the account or consumer number from your bill.</li>
+            <li>Entered mobile number will receive the Payment notification.</li>
+        </ul>
+    </div>
+
+    <!-- Spacer before numpad for buttons -->
+    <div class="ubp-numpad-spacer"></div>
+
+    <shared-numpad (typeCharacter)="typeNumeric($event)"></shared-numpad>
+</div>

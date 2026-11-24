@@ -1,0 +1,68 @@
+<div class="stepper-wrapper">
+    <!-- Step 0: Enter CNIC -->
+    <div class="step" [ngClass]="{'active': stepCount == 0, 'completed': stepCount > 0}">
+      <div class="circle">
+        <span *ngIf="stepCount > 0">&#10003;</span>
+      </div>
+      <div class="label">QR Scan</div>
+    </div>
+    <div class="line" [ngClass]="{'completed': stepCount > 0}"></div>
+
+    <!-- Step 1: Cash Deposit -->
+    <div class="step" [ngClass]="{'active': stepCount == 1, 'completed': stepCount > 1}">
+      <div class="circle">
+        <span *ngIf="stepCount > 1">&#10003;</span>
+      </div>
+      <div class="label">Cash Deposit</div>
+    </div>
+    <div class="line" [ngClass]="{'completed': stepCount > 1}"></div>
+
+    <!-- Step 2: Summary -->
+    <div class="step" [ngClass]="{'completed': stepCount == 2}">
+      <div class="circle">
+        <span *ngIf="stepCount == 2">&#10003;</span>
+      </div>
+      <div class="label">Summary</div>
+    </div>
+</div>
+
+<div class="component-wrapper">
+    <app-qrc-qr-code *ngIf="stepCount == 0" (componentResult)="updateStepper($event)"></app-qrc-qr-code>
+    <app-qr-review *ngIf="stepCount == 1" (componentResult)="updateStepper($event)"></app-qr-review>
+    <app-cd-other-result *ngIf="stepCount == 2"></app-cd-other-result>
+</div>
+  
+  <div class="footer-wrapper" *ngIf="!isHardwareBusy && stepCount > 0 && stepCount !== 2 && !(onceDeposited && stepCount === 1)">
+    <div class="footer-container" [ngStyle]="{
+        'bottom': stepCount === 0 ? '800px' :
+                  stepCount === 1 ? '550px' :
+                  stepCount === 2 ? '550px' : '550px'
+    }">
+      <button 
+        [ngClass]="{
+          'prev': stepCount < 2,
+          'back': stepCount === 2
+        }" 
+        [disabled]="buttonStateDisabled"
+        (click)="(onceDeposited && stepCount >= 2) || stepCount === 1 || stepCount === 0 ? btnCancelTransaction() : btnPrev()">
+      </button>
+      <button class="next" [disabled]="buttonStateDisabled" (click)="btnNext()">
+        {{ onceDeposited ? 'Proceed' : 'Next' }}
+      </button>
+    </div>
+  </div>
+  
+  <ng-container *ngIf="!isHardwareBusy && stepCount === 1 && onceDeposited">
+    <!-- "Cancel" button -->
+    <button class="cancel-btn" [disabled]="buttonStateDisabled" (click)="btnCancelTransaction()">
+      Cancel
+    </button>
+  
+    <!-- "Complete" button -->
+    <button class="complete-btn" [disabled]="buttonStateDisabled" (click)="btnNext()">
+      Complete
+    </button>
+  </ng-container>
+  
+  
+  

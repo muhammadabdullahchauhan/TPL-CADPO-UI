@@ -1,0 +1,38 @@
+
+<ng-container *ngIf="!isChequeScanned && !chequeResponse">
+
+  <!-- Waiting for Cheque: Positioned in space below beneficiary account card -->
+  <div *ngIf="waitingForCheque && !chequeEntered" class="center-item-container center-item cheque-deposit-animation">
+    <img src="assets/img/cheque-entry.gif" alt="Insert Cheque" class="cheque-deposit-gif cheque-entry-gif">
+    <h2 class="cheque-deposit-english-text-acceptor">{{ componentLabeling?.labels?.place_cheque || 'Place Your Cheque In Entry Slot' }}</h2>
+  </div>
+
+  <!-- Cheque Entered: Scanning in progress (using scan-cheque.gif) -->
+  <div *ngIf="chequeEntered" class="center-item-container center-item cheque-scanning-overlay">
+    <img src="assets/img/scan-cheque.gif" alt="Scanning Cheque" class="cheque-deposit-gif cheque-scan-gif">
+    <h3 class="english-txt cheque scan">Your cheque is being scanned</h3>
+  </div>
+
+</ng-container>
+
+<ng-container *ngIf="isChequeScanned || chequeResponse || chequeImageSrc">
+  <!-- Scanned Cheque Image display: Stays visible after parsing, with live verification notice BELOW it during verification -->
+  <div class="cheque-preview-container">
+    <div class="cheque-image-frame">
+      <img class="cheque-scanned-img" [src]="chequeImageSrc || ('data:image/jpeg;base64,' + (scannedFrontImage || chequeResponse?.frontImage))"
+        alt="Cheque Image" />
+    </div>
+
+    <!-- Live Verification status text BELOW scanned image (shown only during verification) -->
+    <div *ngIf="isVerifyingCheque" class="cheque-verification-notice" [class.verified]="isVerificationSuccess">
+      <div *ngIf="!isVerificationSuccess" class="verification-pulse-wrap">
+        <span class="verification-spinner"></span>
+        <span class="verification-text">Please wait while we verify your cheque details...</span>
+      </div>
+      <div *ngIf="isVerificationSuccess" class="verification-success-wrap">
+        <span class="verification-check">✓</span>
+        <span class="verification-success-text">Cheque Verified Successfully</span>
+      </div>
+    </div>
+  </div>
+</ng-container>

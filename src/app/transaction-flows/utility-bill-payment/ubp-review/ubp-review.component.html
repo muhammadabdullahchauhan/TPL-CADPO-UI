@@ -1,0 +1,56 @@
+<div style="height: 30px;"></div>
+
+<ng-container>
+    <div class="component-container">
+        <div class="flex-center">
+            <div class="header-background-color">
+                <h1 style="color: white;">Review Billing Details</h1>
+            </div>
+            <h1>Consumer Account</h1>
+        </div>
+        
+        <div class="block-detail-container">
+            <div class="block-details">
+                <div class="divider"></div>
+                <div class="circle-bill-payment">
+                    <!-- <div class="arrow">→</div> -->
+                    <img src="assets/img/billing-icons/{{ billingCompany.companyCode }}.png" width="100px"
+                    alt="{{ billingCompany.companyName }} Icon" class="company-logo">
+                </div>
+                <div class="text align-left first">
+                    Billed Amount<br>
+                </div>
+                <div class="text align-left second">
+                    Rs. {{billDetail.amount}}
+                </div>
+
+                <div class="text align-left third">
+                    Remaining Rs. {{remainingAmount()}}
+                    <br>
+                    <ng-container *ngIf="walletAmount > 0">
+                        Carry Forward Rs. {{walletAmount}}
+                    </ng-container>
+                </div>
+
+                <div class="text align-right first">
+                    {{billDetail.consumerTitle}}
+                </div>
+                <div class="text align-right second">
+                    {{billDetail.consumerNumber | titlecase}}
+                </div>
+                <div class="text align-right third">
+                    Billing Month: {{billDetail.billingMonth}}
+                    <br>
+                    Due Date: {{billDetail.dueDate}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<div class="d-none col-md-12 col-xl-6 my-col-3">
+    <cash-acceptor [showSimulateCashStuck]="false" (triggerCompleteTransaction)="completeTransaction()" (triggerPicture)="takePicture()"
+        (setAmount)="setCashAmount($event)" #cashAcceptor></cash-acceptor>
+</div>
+
+<div class="AddBottom"></div>

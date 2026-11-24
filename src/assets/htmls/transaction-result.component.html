@@ -1,0 +1,112 @@
+<!-- <app-webcam [takePicture]="pictureTrigger" (outputPacket)="recieveImage($event)"></app-webcam> -->
+<div style="height: 250px;">
+</div>
+<div class="flex-center">
+    <img *ngIf="isSuccess" src="assets/img/success.png" width="250" />
+    <img *ngIf="!isSuccess" src="assets/img/diag_icon_error.png" width="250" />
+</div>
+
+<div class="row">
+
+    <div style="width: 100%;">
+        <p class="input-field-label">Beneficiary Account Title</p>
+        <div class="input-container">
+            <input type="text" class="input-field" [(ngModel)]="accountTitle" disabled="disabled" placeholder="Beneficiary Account Title">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="width-100">
+
+        <p class="input-field-label">Amount (PKR)</p>
+        <div class="input-container">
+            <input type="text" class="input-field" [(ngModel)]="amount" disabled="disabled" placeholder="Amount (PKR)">
+        </div>
+    </div>
+
+</div>
+ 
+
+<!-- <br>
+<ng-container *ngIf="transactionType != 'BILL PAYMENT'">
+    <ng-container *ngIf="form_direction == 'ltr'">
+        <table class="table table-bordered">
+            <tbody>
+                <tr style=" border-bottom: 1px solid #ffffff59;">
+                    <td><b>{{componentLabeling.labels.transaction_number}}</b></td>
+                    <td>{{t_id}}</td>
+                </tr>
+                <tr style=" border-bottom: 1px solid #ffffff59;">
+                    <td><b>{{componentLabeling.labels.transaction_account_title}}</b></td>
+                    <td>{{accountTitle}}</td>
+                </tr>
+
+                <tr>
+                    <td><b>{{componentLabeling.labels.transaction_amount}}</b></td>
+                    <td>Rs. {{amount}}</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </ng-container>
+    <ng-container *ngIf="form_direction == 'rtl'">
+        <table class="table table-bordered {{form_direction == 'ltr' ? 'lang-ltr' : 'lang-rtl'}}">
+            <tbody>
+                <tr style=" border-bottom: 1px solid #ffffff59;">
+                    <td>{{t_id}}</td>
+                    <td><b>{{componentLabeling.labels.transaction_number}}</b></td>
+                </tr>
+                <tr style=" border-bottom: 1px solid #ffffff59;">
+                    <td>{{accountTitle}}</td>
+                    <td><b>{{componentLabeling.labels.transaction_account_title}}</b></td>
+                </tr>
+
+                <tr>
+                    <td>Rs. {{amount}}</td>
+                    <td><b>{{componentLabeling.labels.transaction_amount}}</b></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </ng-container>
+
+</ng-container>
+<br>
+
+<ng-container *ngIf="transactionType != 'BILL PAYMENT'">
+    <div class="center-item ">
+        <h2 *ngIf="isSuccess">Your transacion has been Completed
+            successfully !</h2>
+        <h2 *ngIf="!isSuccess">Your transacion has been declined</h2>
+    </div>
+</ng-container>
+<ng-container *ngIf="transactionType == 'BILL PAYMENT'">
+    <div class="center-item ">
+        <h2 *ngIf="isSuccess">Your bill has been successfully paid</h2>
+        <h2 *ngIf="!isSuccess">Your bill is not paid</h2>
+    </div>
+
+
+</ng-container> -->
+
+
+
+<ng-container *ngIf="printReceiptInquiry || skipReceipt">
+
+</ng-container>
+<br>
+
+
+
+
+<br>
+<ng-container>
+
+</ng-container> 
+
+<div class="footer-container" *ngIf="!skipReceipt && recieptPending">
+    <h2>Do you want a deposit slip?</h2>
+    <button class="prev" [disabled]="btnIsBusy"  style="left: 155px !important; padding: 30px; width: 200px;" (click)="skipPrint()">No</button>
+    <button class="next" [disabled]="btnIsBusy" style="right: 155px !important;  padding: 30px; width: 200px;" (click)="printCommand()">Yes</button>
+</div>

@@ -1,0 +1,190 @@
+{
+    "err_jwt_tware": {
+        "heading": "Error",
+        "message": "We are unable to process your request at the moment."
+    },
+    "err_network_tware": {
+        "heading": "Error",
+        "message": "We are unable to process your request at the moment."
+    },
+    "err_tware_device_auth": {
+        "heading": "Error",
+        "message": "We are unable to process your request at the moment."
+    },
+    "err_terminal_auth": {
+        "heading": "Error",
+        "message": "We are unable to process your request at the moment."
+    },
+    "error_provide_cnic": {
+        "heading": "Invalid CNIC",
+        "message": "Please provide your 13-digit CNIC number."
+    },
+    "err_nadra_verification": {
+        "heading": "Biometric verification failed",
+        "message": "We are unable to process your request at the moment."
+    },
+    "err_account_num": {
+        "heading": "Error",
+        "message": "Please enter 14-digit account number."
+    },
+    "valid_consumer_num": {
+        "heading": "Error",
+        "message": "Please enter valid Account/Consumer number."
+    },
+    "err_account_select": {
+        "heading": "Error",
+        "message": "Please select your account number."
+    },
+    "err_mobile_num": {
+        "heading": "Error",
+        "message": "Please enter valid mobile number."
+    },
+    "err_transaction_purpose": {
+        "heading": "Error",
+        "message": "Please select transaction purpose"
+    },
+    "err_finding_account": {
+        "heading": "Account not found",
+        "message": "Please recheck account# and try again."
+    },
+    "confirm_another_transaction": {
+        "heading": "Confirmation",
+        "message": "Would you like to perform another transaction?"
+    },
+    "confirm_print_receipt": {
+        "heading": "Confirmation",
+        "message": "Would you like to print transaction receipt?"
+    },
+    "confirm_cancel_transaction": {
+        "heading": "Confirmation",
+        "message": "Do you want to cancel this transaction?"
+    },
+    "confirm_excrow_full": {
+        "heading": "Confirmation",
+        "message": "Cash capacity has been reached, would you like to perform this transaction?"
+    },
+    "confirm_logout": {
+        "heading": "Confirmation",
+        "message": "Would you really like to log out?"
+    },
+    "confirm_dismiss_session": {
+        "heading": "Session Timeout",
+        "message": "Do you want to continue this session?"
+    },
+    "confirm_dismiss_transaction": {
+        "heading": "Session Timeout",
+        "message": "Do you want to continue with the transaction?"
+    },
+    "err_acc_find_attempts": {
+        "heading": "Error",
+        "message": "We are unable to process your request at the moment."
+    },
+    "err_accept_cash": {
+        "heading": "Error",
+        "message": "We are unable to add more cash at the moment, kindly complete your transaction"
+    },
+    "text_out_of_service_screen": {
+        "heading": "OUT OF SERVICE",
+        "message": " Machine is temporarily out of order,\n We appologize for inconvenience"
+    },
+    "msg_loading_fetch_acc_title": {
+        "message": "Please wait..."
+    },
+    "msg_loading": {
+        "message": "Please wait..."
+    },
+    "msg_global_error": {
+        "heading": "Error!"
+    },
+    "msg_loading_start_cash_transaction": {
+        "message": "Please wait..."
+    },
+    "msg_loading_cancel_cash_transaction": {
+        "message": "Please wait..."
+    },
+    "msg_modal_biometric": {
+        "message": "Place your right thumb"
+    },
+    "msg_verification_biometric": {
+        "message": "Biometric Verification"
+    },
+    "msg_multiple_tens": {
+        "heading": "Error!",
+        "message": "Entered amount should be multiple of 10's"
+    },
+    "msg_biometric_retry": {
+        "heading": "Biometric verification failed",
+        "message": "Do you want to retry?"
+    },
+    "msg_biometric_failed": {
+        "heading": "Biometric capture failed",
+        "message": "Please try again later"
+    },
+    "msg_wallet_remaining": {
+        "heading": "Sorry!",
+        "message": "You can only perform cash transactions to utilize remaining"
+    },
+    "msg_err_terminal_init": {
+        "heading": "Error!",
+        "message": "There is an error while accpeting cash, would you like to retry?"
+    },
+    "msg_err_proc_req": {
+        "heading": "Error!",
+        "message": "There is an error while processing with your request"
+    },
+    "msg_err_acp_cash": {
+        "heading": "Error!",
+        "message": "There is an error while accpeting cash, would you like to retry?"
+    },
+    "msg_err_validate_cheque": {
+        "heading": "Sorry!",
+        "message": "We are unable to validate your cheque, try again"
+    },
+    "msg_init_terminal": {
+        "message": "Initializing Terminal"
+    },
+    "msg_err_enter_amount": {
+        "heading": "Error!",
+        "message": "Please enter amount"
+    },
+    "msg_err_less_amount": {
+        "heading": "Limit Exceeding!",
+        "message": "Please enter amount less than Rs.{amount}"
+    },
+    "msg_err_proc_cash_transaction": {
+        "heading": "Error!",
+        "message": "There is an error while processing with this transaction"
+    },
+    "msg_transaction_device_error": {
+        "heading": "Sorry for inconvenience",
+        "message": "This transaction is currently not available"
+    },
+    "msg_transaction_unavailable": {
+        "heading": "Coming soon",
+        "message": "this transaction is currently unavailable"
+    },
+    "msg_receipt_unavailable": {
+        "heading": "Receipt not available",
+        "message": "Would you like to proceed with transaction?"
+    },
+    "msg_remove_notes_entryexit": {
+        "heading": "Error",
+        "message": "Please make sure, entry/exit pocket is empty"
+    },
+    "msg_remove_notes_entry": {
+        "heading": "Error",
+        "message": "Please make sure, entry pocket is empty"
+    },
+    "msg_remove_notes_exit": {
+        "heading": "Error",
+        "message": "Please make sure, exit pocket is empty"
+    },
+    "err_select_biller": {
+        "heading": "Error",
+        "message": "Please select billing company"
+    },
+    "err_empty_biller": {
+        "heading": "Error",
+        "message": "Please enter your billing consumer #"
+    }
+}

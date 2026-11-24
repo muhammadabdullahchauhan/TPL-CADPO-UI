@@ -1,0 +1,155 @@
+{
+    "err_jwt_tware": {
+        "heading": "غلطی",
+        "message": "ہم اس وقت آپ کی درخواست پر کارروائی کرنے سے قاصر ہیں"
+    },
+    "err_network_tware": {
+        "heading": "غلطی",
+        "message": "ہم اس وقت آپ کی درخواست پر کارروائی کرنے سے قاصر ہیں"
+    },
+    "err_tware_device_auth": {
+        "heading": "غلطی",
+        "message": "ہم اس وقت آپ کی درخواست پر کارروائی کرنے سے قاصر ہیں"
+    },
+    "err_terminal_auth": {
+        "heading": "غلطی",
+        "message": "ہم اس وقت آپ کی درخواست پر کارروائی کرنے سے قاصر ہیں"
+    },
+    "error_provide_cnic": {
+        "heading": "غلطی",
+        "message": "برائے مہربانی اپنا 13 ہندسوں کا شناختی کارڈ نمبر فراہم کریں."
+    },
+    "err_nadra_verification": {
+        "heading": "غلطی",
+        "message": "ہم اس وقت آپ کی درخواست پر کارروائی کرنے سے قاصر ہیں"
+    },
+    "err_account_num": {
+        "heading": "غلطی",
+        "message": "برائے مہربانی 14 ہندسوں کا اکاؤنٹ نمبر درج کریں۔"
+    },
+    "err_account_select": {
+        "heading": "غلطی",
+        "message": "براہ کرم اپنا اکاؤنٹ نمبر منتخب کریں۔"
+    },
+    "err_mobile_num": {
+        "heading": "غلطی",
+        "message": "براہ کرم درست موبائل نمبر درج کریں"
+    },
+    "err_transaction_purpose": {
+        "heading": "غلطی",
+        "message": "براہ کرم ٹرانزیکشن کا مقصد منتخب کریں"
+    },
+    "err_finding_account": {
+        "heading": "اکاؤنٹ دستیاب نہیں",
+        "message": "براہ کرم اکاؤنٹ نمبر دوبارہ چیک کریں اور دوبارہ کوشش کریں"
+    },
+    "confirm_another_transaction": {
+        "heading": "تصدیق",
+        "message": "کیا آپ ایک اور ٹرانزیکشن کرنا چاہیں گے؟"
+    },
+    "confirm_print_receipt": {
+        "heading": "تصدیق",
+        "message": "کیا آپ ٹرانزیکشن رسید پرنٹ کرنا چاہیں گے؟"
+    },
+    "confirm_cancel_transaction": {
+        "heading": "تصدیق",
+        "message": "کیا آپ اس ٹرانزیکشن کو منسوخ کرنا چاہتے ہیں؟"
+    },
+    "confirm_excrow_full": {
+        "heading": "تصدیق",
+        "message": "نوٹ کی جگہ مکمل ہو چکی ہے، کیا آپ اس لین دین کو انجام دینا چاہیں گے؟"
+    },
+    "confirm_logout": {
+        "heading": "تصدیق",
+        "message": "کیا آپ واقعی لاگ آؤٹ کرنا چاہیں گے؟"
+    },
+    "confirm_dismiss_session": {
+        "heading": "تصدیق",
+        "message": "کیا آپ اس ٹرانزیکشن کو مسترد کرنا چاہتے ہیں؟"
+    },
+    "err_acc_find_attempts": {
+        "heading": "غلطی",
+        "message": "ہم اس وقت آپ کی درخواست پر کارروائی کرنے سے قاصر ہیں"
+    },
+    "err_accept_cash": {
+        "heading": "Error",
+        "message": "ہم مزید نقد رقم شامل کرنے سے قاصر ہیں، براہ مہربانی اپنی ٹرانزیکشن مکمل کریں"
+    },
+    "text_out_of_service_screen": {
+        "heading": "OUT OF SERVICE",
+        "message": " Machine is temporarily out of order,\n We appologize for inconvenience"
+    },
+    "msg_loading_fetch_acc_title": {
+        "message": "براۓ مہربانی انتظار کريں..."
+    },
+    "msg_loading": {
+        "message": "براۓ مہربانی انتظار کريں..."
+    },
+    "msg_loading_start_cash_transaction": {
+        "message": "براۓ مہربانی انتظار کريں..."
+    },
+    "msg_loading_cancel_cash_transaction": {
+        "message": "براۓ مہربانی انتظار کريں..."
+    },
+    "msg_modal_biometric": {
+        "message": "اپنے دائیں انگوٹھے کو رکھیں"
+    },
+    "msg_verification_biometric": {
+        "message": "بائیومیٹرک تصدیق"
+    },
+    "msg_biometric_failed": {
+        "heading": "بائیومیٹرک ناکام",
+        "message": "براہ مہربانی بعد میں دوبارہ کوشش کریں"
+    },
+    "msg_err_terminal_init": {
+        "heading": "Error",
+        "message": "Terminal Environment Initialization Failed"
+    },
+    "msg_err_proc_req": {
+        "heading": "غلطی!",
+        "message": "There is an error while processing with your request"
+    },
+    "msg_init_terminal": {
+        "message": "Initializing Terminal"
+    },
+    "msg_err_enter_amount": {
+        "heading": "غلطی!",
+        "message": "براہ مہربانی رقم درج کریں"
+    },
+    "msg_err_less_amount": {
+        "heading": "غلطی!",
+        "message": "برائے مہربانی روپے سے کم رقم درج کریں{amount}"
+    },
+    "msg_err_proc_cash_transaction": {
+        "heading": "غلطی!",
+        "message": "اس ٹرانزیکشن کے ساتھ پروسیسنگ کرتے وقت کوئی مسئلہ ہے"
+    },
+    "msg_transaction_unavailable": {
+        "heading": "معلومات",
+        "message": "یہ ٹرانزیکشن فی الحال دستیاب نہیں ہے"
+    },
+    "msg_receipt_unavailable": {
+        "heading": "تصدیق",
+        "message": "رسیدیں دستیاب نہیں ہیں، کیا آپ ٹرانزیکشن کے ساتھ آگے بڑھنا چاہیں گے؟"
+    },
+    "msg_remove_notes_entryexit": {
+        "heading": "غلطی",
+        "message": "Please make sure, entry/exit pocket is empty"
+    },
+    "msg_remove_notes_entry": {
+        "heading": "غلطی",
+        "message": "Please make sure, entry pocket is empty"
+    },
+    "msg_remove_notes_exit": {
+        "heading": "غلطی",
+        "message": "Please make sure, exit pocket is empty"
+    },
+    "err_select_biller": {
+        "heading":"غلطی",
+        "message": "براہ کرم بلنگ کمپنی منتخب کریں۔"
+    },
+    "err_empty_biller": {
+        "heading":" غلطی",
+        "message": "براہ کرم اپنا بلنگ صارف نمبر درج کریں۔"
+    }
+}

@@ -1,0 +1,42 @@
+<div style="height: 70px;">
+</div>
+<div class="component-container">
+    <div class="row" style="    justify-content: space-around !important; padding: 20px; gap: 10px; width: 90%;">
+
+        <div>
+            <img src="../../../../assets/svg/icon-cash.svg" style="filter: invert(1); width: 100px;">
+        </div>
+        <div>
+            <p class="input-field-label">Kindly place your cash on the tray and click on the count cash button</p>
+        </div>
+    </div>
+    <div class="row">
+
+        <div style="width: 100%;">
+            <p class="input-field-label">Beneficiary Account Title</p>
+            <div class="input-container">
+                <input type="text" class="input-field" [(ngModel)]="accountTitle" disabled="disabled" placeholder="Account Title">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div style="width: 100%;">
+            <p class="input-field-label">Amount (PKR)</p>
+            <div class="input-container">
+                <input type="text" class="input-field" [(ngModel)]="amount" disabled="disabled" placeholder="XXXXX">
+            </div>
+        </div>
+    </div>
+    <div
+        style="        display: flex;     align-content: stretch;    align-items: center;    padding: 10px;  gap: 50px;">
+
+
+        <div><b></b><br>
+            <p class="input-field-label">Instructions:<br>{{ 'Notes of PKR {notes} will not be accepted\n\n  Only 200 notes will be accepted in one transaction'.replace('{notes}', authorizedDenominations) }}</p>
+        </div>
+
+        <div>
+            <button class="btn-theme" style="width: 205px; margin-top: 25px;">Cash Out</button>
+        </div>
+    </div>
+</div>

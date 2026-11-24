@@ -1,0 +1,98 @@
+<!-- <app-webcam [takePicture]="pictureTrigger" [showPreview]="false" (outputPacket)="recieveImage($event)" #webcam></app-webcam> -->
+<div style="height: 150px;">
+</div>
+<!-- <ng-container *ngIf="isBillPayment">
+  <div class="bg-heading">
+
+    <h1 class="bold-first-word"><span>Billing</span> {{billingCompany.companyType}} Bill</h1>
+  </div>
+  <br>
+</ng-container> -->
+<ng-container *ngIf="isBillPayment || isTopup">
+  <div
+    style="    display: flex;     justify-content: space-between;     height: 70px;     align-items: flex-start;     margin-top: 10px;">
+    <h1 *ngIf="!isTopup" class="underline" style="width: 75%;">Pay <span>{{billingCompany.companyType}}</span> Bill</h1>
+    <h1 *ngIf="isTopup" class="underline" style="width: 75%;">Mobile Topup</h1>
+    <img src="assets/img/billing-icons/{{billingCompany.companyCode}}.png" width="100px"
+      alt="{{billingCompany.companyName}} Icon" style="position: absolute; right: 20px; top: 160px;">
+
+  </div>
+</ng-container>
+
+
+<div class="component-container">
+  <div class="row">
+    <ng-container *ngIf="isTopup">
+      <div style="width: 49%;">
+        <p class="input-field-label">Topup Amount</p>
+        <div class="input-container" [ngClass]="{'active': selectedField == 'amount' }" (click)="focusField('amount')">
+
+          <input type="text" class="input-field"  #txtAmount placeholder="XXXXX">
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!isTopup">
+      <div style="width: 49%;">
+        <p class="input-field-label">{{label_accountNumber}}</p>
+        <div class="input-container" [ngClass]="{'active': selectedField == 'account' }" (click)="focusField('account')">
+          <input type="text" class="input-field"  #txtAccount placeholder="XXXXXXXXXXXXXXXX">
+        </div>
+      </div>
+    </ng-container>
+    <div style="width: 49%;">
+      <p class="input-field-label">Mobile Number</p>
+      <div class="input-container" [ngClass]="{'active': selectedField == 'mobile' }" (click)="focusField('mobile')">
+        <input type="text" class="input-field"   #txtMobile placeholder="03XXXXXXXXX">
+      </div>
+    </div>
+  </div>
+</div>
+<ng-container *ngIf="!isBillPayment && !isTopup">
+  <div class="component-container">
+    <div class="row">
+      <div style="width: 49%;">
+        <p class="input-field-label">Deposit Amount</p>
+        <div class="input-container" [ngClass]="{'active': selectedField == 'amount' }" (click)="focusField('amount')">
+
+          <input type="text" class="input-field"  #txtAmount placeholder="XXXXX">
+        </div>
+      </div>
+      <div style="width: 49%;">
+        <p class="input-field-label">Transaction Purpose</p>
+        <div class="input-container" (click)="togglePurposeList()">
+
+          <input type="text" class="input-field" id="purpose" #txtPurpose placeholder="Select Purpose">
+          <div class="arrow"></div>
+        </div>
+      </div>
+    </div>
+    <div class="purpose-list-wrapper close">
+
+      <div class="radio-list">
+        <ng-container *ngFor="let option of purposeOptions">
+          <input type="radio" id="{{option.id}}" name="purpose" value="{{option.id}}"
+            (change)="selectPurpose(option.id,option.purpose)">
+          <label for="{{option.id}}">{{option.purpose}}</label>
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+</ng-container>
+<div class="padded-container">
+
+
+  <div class="component-container">
+    <div class="row">
+      <button class="full-width btn-theme btn-glossy" style="width: 15%;" (click)="cancelTransaction()"><img
+          src="assets/svg/icon-home.svg" width="35px"></button>
+      <button class="full-width btn-theme btn-primary" style="width: 85%;   margin-left: 15px;"
+        (click)="proceed()">NEXT</button>
+    </div>
+  </div>
+
+  <div style="height: 40px;">
+  </div>
+  <shared-numpad (typeCharacter)="typeNumeric($event)"></shared-numpad>
+
+</div>

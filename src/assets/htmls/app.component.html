@@ -1,0 +1,63 @@
+<app-webcam [takePicture]="pictureTrigger" [altCamera]="cameraSwitcher" [showPreview]="false"
+    (outputPacket)="recieveImage($event)"></app-webcam>
+
+<ng-container *ngIf="!checkUserType()">
+    <!-- Top-Left Logo (Transaction Screens Only - Home background already contains logo) -->
+    <div *ngIf="!isHome" class="header-wrapper left-content">
+        <img src="assets/svg/logo.svg" alt="TouchPoint Logo">
+    </div>
+
+    <!-- Home Screen Top-Right Wallet Pill with Live 1-Minute Countdown -->
+    <button *ngIf="pendingCash > 0 && !isRestrictedScreen && isHomePage" 
+            [disabled]="btnDisabled"
+            class="home-wallet-pill" 
+            (click)="btnWallet()"
+            type="button"
+            title="Available Wallet Balance - Select a transaction to use">
+        <div class="home-wallet-icon-wrap">
+            <img src="assets/svg/icon-wallet.svg" width="16" height="16" alt="Wallet" />
+        </div>
+        <div class="home-wallet-text">
+            <span class="home-wallet-kicker">WALLET BALANCE</span>
+            <span class="home-wallet-amount">PKR {{ pendingCash | number }}</span>
+        </div>
+        <div class="home-wallet-timer" [class.timer-urgent]="walletTimeRemaining <= 15">
+            <svg class="home-wallet-timer-svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span class="home-wallet-timer-val">{{ formattedWalletTime }}</span>
+        </div>
+    </button>
+
+    <!-- Top-Right Header Controls (Transaction Screens Only) -->
+    <div *ngIf="!isHomePage" class="header-wrapper right-content">
+        <!-- Inside Transaction Pending Cash Pill Button -->
+        <button *ngIf="pendingCash > 0 && !isRestrictedScreen" 
+                [disabled]="btnDisabled" 
+                class="tx-wallet-btn" 
+                (click)="btnWallet()"
+                type="button"
+                title="Pending Cash - Tap to View">
+            <div class="tx-wallet-icon-wrap">
+                <img src="assets/svg/icon-wallet.svg" width="16" height="16" alt="Wallet" />
+            </div>
+            <div class="tx-wallet-text">
+                <span class="tx-wallet-title">PENDING CASH</span>
+                <span class="tx-wallet-amount">PKR {{ pendingCash | number }}</span>
+            </div>
+        </button>
+
+        <!-- Exit / Home Button -->
+        <button [disabled]="btnDisabled" class="dropdown-clip" (click)="btnHome()" type="button" title="Exit to Home">
+            <img src="assets/svg/icon-logout.svg" width="18" alt="Exit" />
+        </button>
+    </div>
+
+    <router-outlet></router-outlet>
+</ng-container>
+
+<ng-container *ngIf="checkUserType()">
+    <div class="supervisory-backcolor"></div>
+    <router-outlet></router-outlet>
+</ng-container>

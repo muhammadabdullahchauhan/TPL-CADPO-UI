@@ -1,0 +1,52 @@
+<div style="height: 30px;"></div>
+
+<ng-container>
+    <div class="component-container">
+        <div class="flex-center">
+            <div class="header-background-color">
+                <h1 style="color: white;">Review Transaction Details</h1>
+            </div>
+            <h1>Beneficiary Account</h1>
+        </div>
+
+        <div class="block-detail-container">
+            <div class="block-details">
+                <div class="divider"></div>
+                <div class="circle">
+                    <div class="arrow">→</div>
+                </div>
+                <div class="text align-left first">
+                    Amount<br>
+                </div>
+                <div class="text align-left second">
+                    Rs. {{amount}}
+                </div>
+
+                <div class="text align-left third">
+                    Remaining Rs. {{remainingAmount()}}
+                    <br>
+                    <ng-container *ngIf="showWalletAmount">
+                        Carry Forward Rs. {{walletAmount}}
+                    </ng-container>
+                </div>
+
+                <div class="text align-right first">
+                    To<br>
+                </div>
+                <div class="text align-right second">
+                    {{accountTitle | titlecase }}
+                </div>
+                <div class="text align-right third">
+                    {{accountNum}}
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+<div class="d-none col-md-12 col-xl-6 my-col-3">
+    <cash-acceptor (triggerCompleteTransaction)="completeTransaction()" (triggerPicture)="takePicture()"
+        (setAmount)="setCashAmount($event)" #cashAcceptor></cash-acceptor>
+</div>
+
+<div class="AddBottom"></div>

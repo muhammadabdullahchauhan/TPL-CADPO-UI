@@ -1,0 +1,93 @@
+<!-- <div [ngClass]="{'opacity-hidden' : !stepper}">
+    <div class="alpha-right">
+    </div>
+    <div class="alpha-right-small">
+    </div>
+
+
+    <div class="container">
+        <ul class="stepper">
+            <li class="item  {{stepperSteps > 0 ? 'done' : 'active' }}">Authentication <em>{{stepperSteps > 0 ?
+                    'Completed' :
+                    'Progress' }}</em> </li>
+            <li class="item  {{stepperSteps == 1 ? 'active' : stepperSteps > 1 ? 'done' : '' }}">Account Detail
+                <em>{{stepperSteps ==
+                    1 ? 'Progress' :
+                    stepperSteps > 1 ? 'Completed' :
+                    'Pending' }}</em>
+            </li>
+            <li class="item  {{stepperSteps == 2 ? 'active' : stepperSteps > 2 ? 'done' : '' }}">Review
+                <em>{{stepperSteps ==
+                    2 ? 'Progress' :
+                    stepperSteps > 2 ? 'Completed' :
+                    'Pending' }}</em>
+            </li>
+            <li class="item  {{stepperSteps == 3 ? 'active' : stepperSteps > 3 ? 'done' : '' }}"
+                [ngClass]="{'here': stepperSteps == 3}">Deposit Now
+                <em>{{stepperSteps == 3 ? 'Progress' :
+                    'Pending'
+                    }}</em>
+            </li>
+         
+        </ul>
+    </div>
+</div> -->
+
+
+
+<!-- <div class="header-drawer">
+    <div class="padded-container">
+
+
+        <div class="center-item ">
+            <p>{{notificationText}}</p>
+        </div>
+    </div>
+</div> -->
+
+<div class="component-wrapper">
+    <ng-container *ngIf="stepCount == 0">
+        <div class="component-content "> <app-cnic-input (componentResult)="updateStepper($event)"></app-cnic-input>
+        </div>
+    </ng-container>
+
+    <app-payment-bill *ngIf="isBillPayment && stepCount == 1" (innerSteps)="updateInnerSteps($event)"
+        (componentResult)="updateStepper($event)"></app-payment-bill>
+        <app-vas-mobile-topup *ngIf="vas_mobileTopup && stepCount == 1" (innerSteps)="updateInnerSteps($event)"
+        (componentResult)="updateStepper($event)"></app-vas-mobile-topup>
+    <ng-container *ngIf="!isBillPayment && !vas_mobileTopup">
+        <app-tagged-accounts [ngClass]="{ 'hidden': stepCount != 1 || !accountSelection }"
+            (componentResult)="setAccount()"></app-tagged-accounts>
+    </ng-container>
+
+    <ng-container *ngIf="stepCount == 1">
+        <app-transaction-input *ngIf="!accountSelection"
+            (componentResult)="updateStepper($event)"></app-transaction-input>
+
+
+    </ng-container>
+    <ng-container *ngIf="stepCount == 2">
+        <app-transaction-review (componentResult)="updateStepper(1)"></app-transaction-review>
+    </ng-container>
+
+    <ng-container *ngIf="stepCount == 3">
+        <app-transaction-result (innerSteps)="updateInnerSteps($event)"></app-transaction-result>
+    </ng-container>
+</div>
+
+<!-- <div class="footer">
+    <div class="footer-buttons">
+        <div class="prev" (click)="btnPrev()">
+            <div class="btn ">{{lblBtnPrev}} </div>
+            <div class="circle">
+                <div class="arrow"></div>
+            </div>
+        </div>
+        <div class="next" (click)="btnNext()">
+            <div class="btn ">{{lblBtnNext}} </div>
+            <div class="circle">
+                <div class="arrow"></div>
+            </div>
+        </div>
+    </div>
+</div> -->

@@ -1,0 +1,133 @@
+<div class="modal-container">
+  <div class="modal-content">
+    <!-- Header Icon Badge -->
+    <div class="header-icon-badge">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M6 12h.01M18 12h.01"></path>
+      </svg>
+    </div>
+
+    <!-- Header: Title & Subtitle in Theme Navy Blue & Roboto -->
+    <h1>Cash Stuck Assistance</h1>
+    <p class="subtitle">Please enter your claim details to resolve your transaction</p>
+
+    <!-- Theme-Aligned Transaction Card (TouchPoint #F4F6FD, Navy #1E2875, Roboto) -->
+    <div class="transaction-card">
+      <!-- Line 1: Account Number -->
+      <div class="card-row">
+        <span class="row-label">Account Number</span>
+        <span class="row-value mono">{{ data.accountNumber || 'N/A' }}</span>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <!-- Line 2: Account Title -->
+      <div class="card-row">
+        <span class="row-label">Account Title</span>
+        <span class="row-value">{{ (data.accountTitle | titlecase) || 'N/A' }}</span>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <!-- Line 3: Entered Amount -->
+      <div class="card-row">
+        <span class="row-label">Entered Amount</span>
+        <span class="row-value">PKR {{ (enteredAmount | number) || '0' }}</span>
+      </div>
+
+      <div class="card-divider"></div>
+
+      <!-- Line 4: Deposit Amount -->
+      <div class="card-row">
+        <span class="row-label">Deposit Amount</span>
+        <span class="row-value">PKR {{ (data.depositAmount | number) || '0' }}</span>
+      </div>
+    </div>
+
+    <!-- Denominations Grid Section -->
+    <div class="claim-form-section">
+      <div class="form-group" [class.has-error]="showErrors && !hasEnteredDenoms()">
+        <div class="field-label-row">
+          <label class="field-label">
+            Claim Denominations (Notes Count) <span class="req-star">*</span>
+          </label>
+          <span class="field-error-hint" *ngIf="showErrors && !hasEnteredDenoms()">
+            At least one note count required
+          </span>
+        </div>
+
+        <div class="denom-grid">
+          <div 
+            *ngFor="let denom of denominations"
+            class="denom-chip"
+            [class.active-denom]="activeTarget === denom"
+            [class.has-count]="denomCounts[denom] && denomCounts[denom] !== '0'"
+            (click)="selectTarget(denom)"
+          >
+            <div class="denom-val-row">
+              <span class="denom-val">{{ denom }}</span>
+              <span class="denom-currency">PKR</span>
+            </div>
+            <div class="denom-count-row">
+              <span class="count-prefix">Notes:</span>
+              <span class="count-num">{{ denomCounts[denom] || '0' }}</span>
+              <span class="denom-cursor" *ngIf="activeTarget === denom"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Total Claim Amount (Read-only / Strictly Auto-calculated from Denominations) -->
+      <div class="form-group readonly-claim-group" [class.has-error]="showErrors && !hasEnteredDenoms()">
+        <div class="field-label-row">
+          <label class="field-label">
+            Total Claim Amount <span class="req-star">*</span>
+          </label>
+          <!-- <span class="calc-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Auto-calculated
+          </span> -->
+        </div>
+
+        <div class="total-claim-card" [class.has-amount]="calculateTotalFromDenoms() > 0">
+          <div class="total-claim-left">
+            <div class="currency-pill">PKR</div>
+            <div class="amount-number">
+              {{ (calculateTotalFromDenoms() | number) || '0' }}
+            </div>
+          </div>
+          <div class="total-claim-right">
+            <!-- <span class="calc-subtext" *ngIf="calculateTotalFromDenoms() > 0">
+              Calculated from entered notes
+            </span>
+            <span class="calc-subtext prompt" *ngIf="calculateTotalFromDenoms() === 0">
+              Tap any note above to enter count
+            </span> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standard Numpad (Clean 3x4 grid) -->
+    <div class="numpad-section">
+      <shared-numpad (typeCharacter)="onNumpadInput($event)"></shared-numpad>
+    </div>
+
+    <!-- Action Buttons (Cancel & Submit) -->
+    <div class="dialog-actions">
+      <button type="button" class="btn-dialog-cancel" (click)="closeDialog()">
+        Cancel
+      </button>
+      <button type="button" class="btn-dialog-submit" (click)="submitClaim()">
+        <span>Submit Claim</span>
+        <svg class="submit-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

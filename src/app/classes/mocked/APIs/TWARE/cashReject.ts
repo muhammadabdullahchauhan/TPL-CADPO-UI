@@ -1,0 +1,5 @@
+export class cashReject{
+    static response = {
+        "code":"0000","message":"Success","data":{"finalDenominations":[{"denomination":100,"count":2,"serialNumbers":[{"topSerialNumber":"SU4857305","bottomSerialNumber":"SU4857305","quality":"UNFIT"},{"topSerialNumber":"SU4857307","bottomSerialNumber":"SU4857307","quality":"UNFIT"}]},{"denomination":50,"count":1,"serialNumbers":[{"topSerialNumber":"PU8039868","bottomSerialNumber":"PU8039868","quality":"UNFIT"}]}],"currentDenominations":{"totalRejected":"1","totalAmount":"250","inEscrow":"3","denominations":[{"denomination":100,"count":2,"serialNumbers":[{"topSerialNumber":"SU4857305","bottomSerialNumber":"SU4857305","quality":"UNFIT"},{"topSerialNumber":"SU4857307","bottomSerialNumber":"SU4857307","quality":"UNFIT"}]},{"denomination":50,"count":1,"serialNumbers":[{"topSerialNumber":"PU8039868","bottomSerialNumber":"PU8039868","quality":"UNFIT"}]}]}},"errors":null
+    }
+}

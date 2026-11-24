@@ -1,0 +1,240 @@
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+}
+
+/* State 1: Cheque Entry Animation - Absolute & Anchored */
+:host ::ng-deep .cheque-deposit-animation,
+.cheque-deposit-animation {
+  position: absolute !important;
+  top: 50px !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 710px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Cheque Entry GIF - Enlarged to comfortably fill space */
+:host ::ng-deep .cheque-entry-gif,
+.cheque-entry-gif {
+  width: 350px !important;
+  max-width: 88% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto 16px auto !important;
+}
+
+:host ::ng-deep .cheque-deposit-english-text-acceptor,
+.cheque-deposit-english-text-acceptor {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #1E2875 !important;
+  font-family: var(--defaultFont) !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  letter-spacing: -0.2px !important;
+}
+
+/* State 2: Cheque Scan GIF - Absolute & Anchored */
+:host ::ng-deep .cheque-scanning-overlay,
+.cheque-scanning-overlay {
+  position: absolute !important;
+  top: 40px !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 710px !important;
+  padding: 0 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+
+/* Cheque Scan GIF - Enlarged to comfortably fill space */
+:host ::ng-deep .cheque-scan-gif,
+.cheque-scan-gif {
+  width: 380px !important;
+  max-width: 90% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 0 auto 16px auto !important;
+}
+
+:host ::ng-deep .cheque-scanning-overlay h3.english-txt.cheque.scan,
+.cheque-scanning-overlay h3.english-txt.cheque.scan {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #1E2875 !important;
+  letter-spacing: 0.2px !important;
+  margin: 0 0 8px 0 !important;
+  font-family: var(--defaultFont) !important;
+  text-align: center !important;
+}
+
+:host ::ng-deep .cheque-scanning-subtext,
+.cheque-scanning-subtext {
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  color: #64748B !important;
+  margin: 0 auto !important;
+  font-family: var(--defaultFont) !important;
+  text-align: center !important;
+}
+
+/* State 3: Scanned Cheque Image Frame & Image - Absolute & Anchored */
+:host ::ng-deep .cheque-preview-container,
+.cheque-preview-container {
+  position: absolute !important;
+  top: 30px !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+  max-width: 710px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  box-sizing: border-box !important;
+}
+
+:host ::ng-deep .cheque-image-frame,
+.cheque-image-frame {
+  width: 100% !important;
+  max-width: 700px !important;
+  margin: 0 auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+:host ::ng-deep .cheque-scanned-img,
+.cheque-scanned-img {
+  width: 100% !important;
+  max-width: 680px !important;
+  max-height: 260px !important;
+  object-fit: contain !important;
+  border-radius: 14px !important;
+  display: block !important;
+  margin: 200px auto !important;
+}
+
+/* Cheque Verification Live Notice BELOW scanned cheque image */
+.cheque-verification-notice {
+  margin: 120px auto 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  position: absolute;
+  border-radius: 30px;
+  background: #FFFFFF;
+  /* border: 1.5px solid #E2E8F0;
+  box-shadow: 0 4px 18px rgba(30, 40, 117, 0.1); */
+  transition: all 0.3s ease;
+  animation: noticeAppear 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.cheque-verification-notice.verified {
+  border-color: #2ECC71;
+}
+
+.verification-pulse-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.verification-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2.5px solid #CBD5E1;
+  border-top-color: #1E2875;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.verification-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1E2540;
+  letter-spacing: 0.2px;
+  animation: pulseFade 1.6s ease-in-out infinite alternate;
+}
+
+@keyframes pulseFade {
+  0% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.verification-success-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.verification-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #2ECC71;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.verification-success-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #27AE60;
+  letter-spacing: 0.2px;
+}
+
+@keyframes noticeAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.85);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

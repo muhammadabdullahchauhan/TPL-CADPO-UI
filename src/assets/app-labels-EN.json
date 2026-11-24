@@ -1,0 +1,150 @@
+{
+    "localization": {
+        "settings": {
+            "direction": "ltr",
+            "langCode": "EN"
+        },
+        "buttons": {
+            "yes": "Yes",
+            "no": "No",
+            "okay": "Okay",
+            "next" : "Next",
+            "back" : "Back",
+            "proceed" : "Proceed"
+        }
+    },
+    "home_screen": {},
+    "cnic_screen": {
+        "text_to_speech": {
+            "onload": "Please enter your 13-digit CNIC number",
+            "captureBiometric": "Place your right thumb on finger print scanner"
+        },
+        "input_cnic": {
+            "label": "PLEASE ENTER YOUR CNIC# HERE",
+            "placeholder": "e.g 42301-0815283-3",
+            "error": "Unable to capture fingerprint, Please Try again!"
+        },
+        "labels": {
+            "authorizedDenomination": "Note: Currently, we are not accepting {notes} note(s)"
+        },
+        "buttons": {
+            "accept": "NEXT"
+        }
+    },
+    "transaction_input": {
+        "text_to_speech": {
+            "onload": "Please enter following details"
+        },
+        "input_account": {
+            "label": "ENTER ACCOUNT #",
+            "placeholder": "BBBBAAAAAAAAA"
+        },
+        "select_account": {
+            "label": "SELECT ACCOUNT #",
+            "placeholder": ""
+        },
+        "input_mobile": {
+            "label": "ENTER MOBILE #",
+            "placeholder": "03XX-XXXXXXXX"
+        },
+        "input_amount": {
+            "label": "ENTER AMOUNT",
+            "placeholder": ""
+        },
+        "select_transaction_purpose": {
+            "label": "PURPOSE OF TRANSACTION",
+            "placeholder": ""
+        },
+        "validation": {
+            "msg_amount_limit": "Amount should be less than Rs.{amount}",
+            "msg_amount_info": "Amount should multiple of {denomination}s"
+        },
+        "buttons": {
+            "accept": "NEXT"
+        }
+    },
+    "transaction_bill_payment": {
+        "text_to_speech": {
+            "onload": "Please select billing company"
+        },
+        "input_account": {
+            "label": "ENTER ACCOUNT / CONSUMER #",
+            "placeholder": ""
+        },
+        "input_mobile": {
+            "label": "ENTER MOBILE #",
+            "placeholder": "03XX-XXXXXXXX"
+        },
+        "labels": {
+            "sub_heading": "Select Billing Company"
+        },
+        "buttons": {
+            "accept": "NEXT"
+        }
+    },
+    "transaction_mobile_topup": {
+        "input_mobile": {
+            "label": "ENTER MOBILE #",
+            "placeholder": "03XX-XXXXXXXX"
+        },
+        "buttons": {
+            "accept": "TOPUP NOW"
+        }
+    },
+    "transaction_review": {
+        "text_to_speech": {
+            "onload": "Review your transaction details, and proceed to deposit",
+            "depositCash": "Please place your cash to deposit",
+            "collectedCash": "{amount} rupees has been collected",
+            "rejectedCashSingular": "{notes} note is rejected",
+            "rejectedCashPlural": "{notes} notes are rejected",
+            "cancelCash": "Please collect your notes.",
+            "processingTransaction": "Please wait, your transaction is being processed"
+        },
+        "labels": {
+            "review_billing_detail": "Review Billing Details",
+            "review_transaction_detail": "Review Transaction Details",
+            "review_account_title": "Account Title",
+            "review_account_number": "Account #",
+            "review_amount": "Amount",
+            "beneficiary_account": "Beneficiary Account",
+            "billed_amount": "Billed Amount",
+            "bill_due_date": "Due Date",
+            "billingMonth": "Billing Month",
+            "bill_status": "Bill Status",
+            "place_cash": "Place your cash on entry pocket",
+            "place_cheque": "Please insert your cheque",
+            "place_cheque_urdu": "براہ کرم اپنا چیک ڈالیں",
+            "collected_total_amount": "Rs. {amount} rupees has been collected",
+            "rejectedCashSingular": "1 note is rejected",
+            "rejectedCashPlural": "{notes} notes are rejected",
+            "collected_total_amount_urdu": "{amount} روپے جمع کر لئے گئے ہیں",
+            "rejectedCashSingular_urdu": "١ نوٹ مسترد ہے",
+            "rejectedCashPlural_urdu": "نوٹ مسترد ہیں {notes}"
+
+        },
+        "buttons": {
+            "add_more_cash": "ADD CASH",
+            "cancel": "CANCEL",
+            "accept": "PROCEED",
+            "complete": "COMPLETE"
+        }
+    },
+    "transaction_result": {
+        "text_to_speech": {
+            "collect_receipt": "Please collect your transaction receipt",
+            "greeting": "Thank you for using our services"
+        },
+        "labels": {
+            "transaction_success_message": "Transaction has been successfully completed!",
+            "transaction_error_message": "Transaction cannot be completed",
+            "transaction_number": "Transaction #",
+            "transaction_account_title": "Account Title",
+            "transaction_amount": "Amount",
+            "billed_amount": "Billed Amount",
+            "bill_due_date": "Due Date",
+            "billingMonth": "Billing Month",
+            "bill_status": "Bill Status"
+        }
+    }
+}

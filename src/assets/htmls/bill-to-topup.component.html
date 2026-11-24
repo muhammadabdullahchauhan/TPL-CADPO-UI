@@ -1,0 +1,194 @@
+<h3 class="center_content">Rs. {{remainingAmount}} is available for Top-up</h3>
+<br>
+
+
+<div class="  card-default card-shadow    mb-4">
+    <div class="card-header">
+        <h3 class="theme-heading" style="font-size: 1.1rem;">
+            <div class="row">
+                <div class="col-11">
+                    <b>Select Type</b>
+                </div>
+                <!-- <div class="col-1 lang-rtl" *ngIf="section.transactionTypes.length < 4 ? false : true" >
+                        <i class=" col- fa fa-chevron-left"></i> &nbsp;
+                        <i class=" col- fa fa-chevron-right"></i>
+                    </div> -->
+            </div>
+
+
+        </h3>
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+
+            <swiper [config]="firstSwiper" [slidesPerView]="3" style="padding:0 10px 0 10px" #transactionSwiper>
+                <ng-template swiperSlide>
+                    <div (click)="selectTopupType('Mobile-Topup')" 
+                        class="anim-shine home-button shadow   bg-custom row {{form_direction == 'ltr' ? 'content-ltr' : 'content-rtl'}}">
+                        <div class="col-8">
+                            <p class="body-text">Mobile Top-up</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <img src="./assets/img/icon.png" style="width:50px; " />
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template swiperSlide>
+                    <div (click)="selectTopupType('Deposit to Bank Account')" 
+                        class="anim-shine home-button shadow   bg-custom row {{form_direction == 'ltr' ? 'content-ltr' : 'content-rtl'}}">
+                        <div class="col-8">
+                            <p class="body-text">Bank Deposit</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <img src="./assets/img/icon.png" style="width:50px; " />
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template swiperSlide>
+                    <div (click)="selectTopupType('Donate')" 
+                        class="anim-shine home-button shadow   bg-custom row {{form_direction == 'ltr' ? 'content-ltr' : 'content-rtl'}}">
+                        <div class="col-8">
+                            <p class="body-text">Donate</p>
+                        </div>
+                        <div class="col-4 text-center">
+                            <img src="./assets/img/icon.png" style="width:50px; " />
+                        </div>
+                    </div>
+                </ng-template>
+            </swiper>
+            <!-- <swiper [config]="transactionsSwiper" [slidesPerView]="3" style="padding:0 10px 0 10px"
+                    [enabled]="section.transactionTypes.length < 4 ? false : true" #transactionSwiper   >
+
+                    <ng-template swiperSlide *ngFor=" let index of [0,1,2,3,4]"  >
+                        <div class="anim-shine home-button shadow   bg-custom row {{form_direction == 'ltr' ? 'content-ltr' : 'content-rtl'}}" 
+                        (click)='btnTransaction(section.categoryType,section.transactionTypes[index].actionName,section.transactionTypes[index].transactionTypeId)'
+                        *ngIf="section.transactionTypes[index] != null">
+                      
+                            <div class="col-8">
+                                <p  class="body-text" [innerHTML]="section.transactionTypes[index].transactionTypeName "  ></p>
+                            </div>
+
+                            <div class="col-4 text-center">
+                                <img src="./assets/img/icon.png" style="width:50px; " />
+                            </div>
+                    
+                         
+                       
+                        </div>
+                        <br>
+                      
+                    </ng-template>
+
+                </swiper> -->
+
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="selectedType" class="  card-default card-shadow    mb-4">
+    <div class="card-header">
+        <h3 class="theme-heading" style="font-size: 1.1rem;">
+            <div class="row">
+                <div class="col-11">
+                    <b>Select Network Provider</b>
+                </div>
+                <!-- <div class="col-1 lang-rtl" *ngIf="section.transactionTypes.length < 4 ? false : true" >
+                        <i class=" col- fa fa-chevron-left"></i> &nbsp;
+                        <i class=" col- fa fa-chevron-right"></i>
+                    </div> -->
+            </div>
+
+
+        </h3>
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+
+            <swiper [config]="secondSwiper" [slidesPerView]="4" style="padding:10px" #transactionSwiper>
+                <ng-template swiperSlide *ngFor="let option of secondCrousel">
+                    <label>
+                        <input type="radio" name="test" value="{{option.providerCode}}"   />    <img (click)="setOption(option)"   class="company-icon" src="https://desktop-34ip0tq:4455/{{option.providerLogoPath}}?"   />
+            </label>
+                    </ng-template>
+          
+            </swiper>
+            <!-- <swiper [config]="transactionsSwiper" [slidesPerView]="3" style="padding:0 10px 0 10px"
+                    [enabled]="section.transactionTypes.length < 4 ? false : true" #transactionSwiper   >
+
+                    <ng-template swiperSlide *ngFor=" let index of [0,1,2,3,4]"  >
+                        <div class="anim-shine home-button shadow   bg-custom row {{form_direction == 'ltr' ? 'content-ltr' : 'content-rtl'}}" 
+                        (click)='btnTransaction(section.categoryType,section.transactionTypes[index].actionName,section.transactionTypes[index].transactionTypeId)'
+                        *ngIf="section.transactionTypes[index] != null">
+                      
+                            <div class="col-8">
+                                <p  class="body-text" [innerHTML]="section.transactionTypes[index].transactionTypeName "  ></p>
+                            </div>
+
+                            <div class="col-4 text-center">
+                                <img src="./assets/img/icon.png" style="width:50px; " />
+                            </div>
+                    
+                         
+                       
+                        </div>
+                        <br>
+                      
+                    </ng-template>
+
+                </swiper> -->
+
+        </div>
+
+    
+    </div>
+
+</div>
+
+
+<div *ngIf="selectedNetwork" class="  card-default card-shadow    mb-4">
+    <div class="card-header">
+        <h3 class="theme-heading" style="font-size: 1.1rem;">
+            <div class="row">
+                <div class="col-11">
+                    <b>Enter {{selectedNetwork.providerName}} Mobile#</b>
+                </div>
+                <!-- <div class="col-1 lang-rtl" *ngIf="section.transactionTypes.length < 4 ? false : true" >
+                        <i class=" col- fa fa-chevron-left"></i> &nbsp;
+                        <i class=" col- fa fa-chevron-right"></i>
+                    </div> -->
+            </div>
+
+
+        </h3>
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            
+            <div class="col-sm-12">
+                <mat-form-field [dir]="form_direction" style="width: 100%;" appearance="outline"
+                    class=" theme-color">
+                    <mat-label>{{componentLabeling.input_mobile.label}}</mat-label>
+                    <input matInput placeholder="{{componentLabeling.input_mobile.placeholder}}" id="txt_mobile"
+                        #fieldMobile name="input_mobile" [(ngModel)]="input_mobile"
+                        (focus)="onFocusEvent($event)">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            
+            <div class="col-12"> <button mat-flat-button color="primary" (click)="completeTopup()"
+                    class="full-width material-cust-large-button theme-color">{{componentLabeling.buttons.accept}}</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="sticky inputFontSize  theme-color">
+    <div class="keyboard-instance-11"></div>
+</div>

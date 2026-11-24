@@ -1,0 +1,24 @@
+{
+    "app_version": "1.1",
+    "theme": "meezan_v2",
+    "transaction_amount_limit": "1000000",
+    "biometric_attempts_count": "3",
+    "account_num_limit": "14",
+    "account_fetch_attempts_count": "3",
+    "request_attempt_count": "3",
+    "session_maintain": true,
+    "log_message": false,
+    "log_functions": false,
+    "log_component_methods": false,
+
+    "log_api_calls": true,
+    "log_response": true,
+    "log_interval": false,
+    "log_EJ" : true,
+    "inner_calls": false,
+
+    "production_TWARE": false,
+    "production_QServices": false,
+    "production_TAgent": false,
+    "production_AIAgent": false
+}

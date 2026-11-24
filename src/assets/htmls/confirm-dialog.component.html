@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>
+  {{title}}
+</h1>
+
+<div mat-dialog-content>
+  <p>{{message}}</p>
+</div>
+
+<div *ngIf="!confirmation" mat-dialog-actions style="  justify-content: flex-end;">
+  <!-- <button mat-button (click)="onDismiss()">No</button> -->
+  <button mat-flat-button color="primary" class="theme-color" (click)="onConfirm()">{{buttons.okay}}</button>
+</div>
+
+<div *ngIf="confirmation" mat-dialog-actions style="  justify-content: flex-end;">
+  <!-- <button mat-button (click)="onDismiss()">No</button> -->
+  <button mat-flat-button color="primary" class= "theme-color" (click)="onConfirm()">{{buttons.yes}}</button>
+  <button mat-stroked-button class= "button-color theme-sec-button" (click)="onDismiss()">{{buttons.no}}</button>
+</div>

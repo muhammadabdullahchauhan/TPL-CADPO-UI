@@ -1,0 +1,83 @@
+.display {
+  width: 100%;
+  font-size: 24px;
+  padding: 5px;
+  text-align: right;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 40px;
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.numpad button.btn {
+  font-size: 34px;
+  color: #000000;
+  padding: 30px 10px;
+  text-align: center;
+  cursor: pointer;
+  width: 97px;
+  height: 94px;
+  position: relative;
+  border-radius: 16px;
+  border: none;
+  background: #EDEDED;
+  box-shadow: 0px 3px 8px rgba(30, 40, 117, 0.06);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+  font-weight: 700;
+  font-family: var(--defaultFont) !important;
+}
+
+.numpad .buttons .btn:active {
+  transform: scale(0.94);
+  transition: transform 0.15s ease;
+  background: #1E2875 !important;
+  color: #FFFFFF !important;
+  border-radius: 16px !important;
+  box-shadow: 0px 4px 12px rgba(30, 40, 117, 0.25);
+}
+
+.numpad .buttons .btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 16px;
+  transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease;
+  pointer-events: none;
+}
+
+.numpad .buttons .btn:active::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.numpad .delete {
+  background: #F2F4F8;
+  color: #1E2875;
+  font-size: 28px;
+}
+
+.numpad .clear {
+  color: #FF5C00 !important;
+}
+
+/* Active class for delete button */
+.numpad .buttons .delete.active {
+  background: #FF5C00 !important;
+  color: white;
+}
+
+.numpad .buttons img {
+  width: 30px;
+}

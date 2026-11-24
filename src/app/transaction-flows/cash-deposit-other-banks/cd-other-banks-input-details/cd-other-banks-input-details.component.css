@@ -1,0 +1,37 @@
+.transaction-input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 96%;
+    max-width: 735px;
+    margin: 10px auto 14px auto;
+    box-sizing: border-box;
+}
+
+.transaction-input-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1E2875;
+    margin: 0;
+    font-family: var(--defaultFont);
+}
+
+.transaction-input-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    background: #FFFFFF;
+    border: 1.5px solid #DCE3F0;
+    box-shadow: 0 2px 8px rgba(30, 40, 117, 0.06);
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+.transaction-input-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}

@@ -1,0 +1,50 @@
+<div style="height: 15px;"></div>
+
+<div class="transaction-input-header">
+  <h1 class="transaction-input-title">{{ topupCompany?.companyName ? topupCompany.companyName + ' Top-up' : 'Mobile Top-up' }}</h1>
+  <div class="transaction-input-logo" *ngIf="topupCompany?.companyCode">
+    <img [src]="'assets/img/billing-icons/' + topupCompany.companyCode + '.png'"
+         [alt]="topupCompany.companyName + ' Icon'">
+  </div>
+</div>
+  
+<div class="details-container">
+    <div class="component-container">
+        <div class="row">
+            <div class="flex-container">
+                <div class="flex-item prevent-wrapper full" [ngClass]="{'active': selectedField == 'amount' }" (click)="focusField('amount')">
+                    <p class="input-field-label account">
+                        Enter Topup Amount<br>
+                        <!-- <span class="urdu-txt">ٹاپ اپ کی رقم درج کریں۔</span> -->
+                    </p>
+                    <input type="text" class="dots-input account" maxlength="10" #inputAmount placeholder="XXXXX">
+                </div>
+            </div>
+            <div class="flex-container adjusted-flex-container">
+                <div class="flex-item prevent-wrapper full adjusted-flex-item" [ngClass]="{'active': selectedField == 'mobile' }" (click)="focusField('mobile')">
+                    <p class="input-field-label mobile">
+                        Enter Mobile Number<br>
+                        <!-- <span class="urdu-txt">موبائل نمبر درج کریں</span> -->
+                    </p>
+                    <input type="text" class="dots-input mobile" maxlength="11" #inputMobile placeholder="03XXXXXXXXX">
+                </div>
+            </div>
+        </div>
+
+        <div class="placeholder-container input-component">
+            <div class="instruction-image"></div>
+            <h2 class="placeholder-heading">Instructions:</h2>
+            <ul class="placeholder-list bill-input">
+                <li>Enter the amount you wish to top up.</li>
+                <li>The entered mobile number will receive top-up amount.</li>
+
+                <!-- Add more points as needed -->
+            </ul>
+        </div>
+
+        <div style="height: 150px;"></div>
+        <shared-numpad (typeCharacter)="typeNumeric($event)"></shared-numpad>
+    </div>
+</div>
+
+

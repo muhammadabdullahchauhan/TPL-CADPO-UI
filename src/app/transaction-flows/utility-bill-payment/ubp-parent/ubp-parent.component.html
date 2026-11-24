@@ -1,0 +1,116 @@
+<div class="stepper-wrapper">
+  <div class="step" [ngClass]="{'active': stepCount == 0, 'completed': stepCount > 0}">
+    <div class="circle">
+      <span *ngIf="stepCount > 0">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Enter CNIC</div>
+  </div>
+  <div class="step-line enlarged" [ngClass]="{'completed-line': stepCount > 0}"></div> <!-- Enlarged line -->
+
+  <div class="step" [ngClass]="{'active': stepCount == 1, 'completed': stepCount > 1}">
+    <div class="circle">
+      <span *ngIf="stepCount > 1">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Billing Companies</div>
+  </div>
+  <div class="step-line enlarged" [ngClass]="{'completed-line': stepCount > 1}"></div> <!-- Enlarged line -->
+
+  <div class="step" [ngClass]="{'active': stepCount == 2, 'completed': stepCount > 2}">
+    <div class="circle">
+      <span *ngIf="stepCount > 2">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Customer Details</div>
+  </div>
+  <div class="step-line enlarged" [ngClass]="{'completed-line': stepCount > 2}"></div> <!-- Enlarged line -->
+
+  <div class="step" [ngClass]="{'active': stepCount == 3, 'completed': stepCount > 3}">
+    <div class="circle">
+      <span *ngIf="stepCount > 3">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Bill Payment</div>
+  </div>
+  <div class="step-line enlarged" [ngClass]="{'completed-line': stepCount > 3}"></div> <!-- Enlarged line -->
+
+  <div class="step" [ngClass]="{'completed': stepCount == 4}">
+    <div class="circle">
+      <span *ngIf="stepCount == 4">&#10003;</span> <!-- Checkmark for completed step -->
+    </div>
+    <div class="label">Summary</div>
+  </div>
+  <!-- No line after the last step -->
+</div>
+
+<div class="component-wrapper">
+
+    <app-cnic-input *ngIf="stepCount == 0" 
+    (componentResult)="updateStepper($event)"></app-cnic-input>
+
+    <app-ubp-bill-payment *ngIf="stepCount == 1"
+    (componentResult)="updateStepper($event)"></app-ubp-bill-payment>
+
+    <app-ubp-transaction-input (componentResult)="updateStepper($event)" 
+    *ngIf="stepCount == 2"></app-ubp-transaction-input>
+    <app-ubp-review *ngIf="stepCount == 3" 
+    (componentResult)="updateStepper($event)"></app-ubp-review>
+
+    <app-ubp-result *ngIf="stepCount == 4"></app-ubp-result>
+
+</div>
+  
+<div class="footer-wrapper" *ngIf="!isHardwareBusy && stepCount !== 4 && !(onceDeposited && stepCount === 3)">
+  <div class="footer-container" [ngStyle]="{
+      'bottom': stepCount === 0 ? '800px' :
+                stepCount === 1 ? '190px' :
+                stepCount === 2 ? '705px' : 
+                stepCount === 3 ? '550px' : '550px'
+    }">
+    <button [ngClass]="{
+      'prev': stepCount === 0 || (stepCount === 1 && !isSubStepCompany),
+      'back': isSubStepCompany || stepCount === 2 || stepCount === 3
+    }"  
+    [disabled]="buttonStateDisabled"
+      (click)="(onceDeposited && stepCount >= 3) || (stepCount === 1 && !isSubStepCompany) || stepCount === 0 ? btnCancelTransaction() : btnPrev()">
+      <span *ngIf="!(onceDeposited && stepCount >= 3) && !(stepCount === 1 && !isSubStepCompany) && stepCount !== 0 && stepCount <= 4"></span>
+      <span *ngIf="(onceDeposited && stepCount >= 3) || (stepCount === 1 && !isSubStepCompany) || stepCount === 0"></span>
+    </button>
+    <button class="next" [disabled]="buttonStateDisabled" (click)="btnNext()">
+      {{ onceDeposited ? 'Proceed' : 'Next' }}
+    </button>
+  </div>
+</div>
+
+<ng-container *ngIf="!isHardwareBusy && stepCount === 3 && onceDeposited">
+  <!-- "Cancel" button -->
+  <button class="cancel-btn" [disabled]="buttonStateDisabled" (click)="btnCancelTransaction()">
+    Cancel
+  </button>
+
+  <!-- "Complete" button -->
+  <button class="complete-btn" [disabled]="buttonStateDisabled" (click)="btnNext()">
+    Pay
+  </button>
+</ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

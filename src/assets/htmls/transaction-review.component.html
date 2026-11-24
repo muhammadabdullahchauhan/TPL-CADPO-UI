@@ -1,0 +1,250 @@
+<!-- <app-webcam [takePicture]="pictureTrigger" (outputPacket)="recieveImage($event)"></app-webcam> -->
+<div style="height: 80px;">
+</div>
+<ng-container *ngIf="cd_other_flow">
+  <div class="component-container">
+    <div class="row" style="    justify-content: space-around !important; padding: 20px; gap: 10px; width: 90%;">
+
+      <div>
+        <img src="../../../../assets/svg/icon-cash.svg" style="filter: invert(1); width: 100px;">
+      </div>
+      <div>
+        <p class="input-field-label">Kindly place your cash on the tray and click on the count cash button</p>
+      </div>
+    </div>
+    <div class="row">
+
+      <div style="width: 100%;">
+        <p class="input-field-label">Beneficiary Account Title</p>
+        <div class="input-container prevent-wrapper">
+          <input type="text" class="input-field" [(ngModel)]="accountTitle" disabled="disabled" placeholder="Beneficiary Account Title">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div [ngClass]="{'width-50' : depositedCash > 0,'width-100' : depositedCash <= 0}">
+        <p class="input-field-label" *ngIf="depositedCash > 0">Entered Amount (PKR)</p>
+        <p class="input-field-label" *ngIf="depositedCash <= 0">Amount (PKR)</p>
+        <div class="input-container prevent-wrapper">
+          <input type="text" class="input-field" [(ngModel)]="amount" disabled="disabled" placeholder="Amount (PKR)">
+        </div>
+      </div>
+      <div class="width-50" *ngIf="depositedCash > 0">
+        <p class="input-field-label">Remaining Amount (PKR)</p>
+        <div class="input-container prevent-wrapper">
+          <input type="text" class="input-field" [value]="(+amount) - (+depositedCash) > 0 ? (+amount) - (+depositedCash) : '0'" disabled placeholder="Remaining Amount (PKR)">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</ng-container>
+<!-- 
+<h5 class="bg-glossy" *ngIf=" accountTitle || billDetail">{{billDetail != null ?
+  componentLabeling.labels.review_billing_detail : componentLabeling.labels.review_transaction_detail}}</h5>
+<br>
+
+<br>
+
+<div class="flex-center">
+  <h1>Beneficiary Account</h1>
+
+</div>
+
+<ng-container *ngIf="topupTransaction">
+  <div class="block-detail-container ">
+    <div class="block-details  ">
+      <div class="divider"></div>
+
+      <div class="circle">
+        <div class="arrow">→</div>
+      </div>
+      <div class="text align-left first">
+        Topup Amount
+      </div>
+      <div class="text align-left second">
+        Rs. {{amount}}
+      </div>
+      <div *ngIf="carryForward > 0" class="text  align-left third">
+        Carry Forward Rs.{{carryForward}}
+      </div>
+
+      <div class="text align-right first">
+        {{mobileNum}}
+      </div>
+
+      <div class="text  align-right second">
+        {{companyCode}}
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="!billDetail && !topupTransaction">
+  <div class="block-detail-container ">
+    <div class="block-details  ">
+
+      <div class="divider"></div>
+      <div class="circle">
+        <div class="arrow">→</div>
+      </div>
+      <div class="text align-left first">
+        Amount
+      </div>
+      <div class="text align-left second">
+        Rs. {{amount}}
+      </div>
+
+      <div *ngIf="carryForward > 0" class="text  align-left third">
+        Carry Forward Rs.{{carryForward}}
+      </div>
+      <div class="text align-right first">
+        To
+      </div>
+      <div class="text  align-right second">
+        {{accountTitle}}
+      </div>
+      <div class="text  align-right third">
+        {{accountNum}}
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+<ng-container *ngIf="billDetail ">
+  <div class="block-detail-container ">
+    <div class="block-details  ">
+      <div class="divider"></div>
+
+      <div class="circle">
+        <div class="arrow">→</div>
+      </div>
+      <div class="text align-left first">
+        Billed Amount
+      </div>
+      <div class="text align-left second">
+        Rs. {{billDetail.amount}}
+      </div>
+      <div *ngIf="carryForward > 0" class="text  align-left third">
+        Carry Forward Rs.{{carryForward}}
+      </div>
+
+      <div class="text align-right first">
+        {{billDetail.consumerNumber}}
+      </div>
+      <div class="text  align-right second">
+        {{billDetail.consumerTitle}}
+      </div>
+      <div class="text  align-right third">
+        {{billDetail.dueDate}} / {{billDetail.billingMonth}}
+      </div>
+
+    </div>
+  </div>
+</ng-container>
+
+
+<ng-container *ngIf="responsePending && cashTransaction">
+  <br>
+  <div class="center-item ">
+    <h3>{{componentLabeling.labels.place_cash}}</h3>
+
+  </div>
+
+  <div class="center-item ">
+
+    <img src="assets/img/insert-cash.gif" width="300" />
+  </div>
+</ng-container> -->
+
+<div class="d-none col-md-12 col-xl-6    my-col-3">
+  <cash-acceptor *ngIf="cashTransaction"  
+    (triggerCompleteTransaction)="completeTransaction()" (triggerPicture)="takePicture()"
+   (cashAccepting)="placeCash()" (cashAccepted)="cashAcceptedOnce()"
+    (setAmount)="setCashAmount($event)" (triggerCancelTransaction)="cancelTransaction()" #cashAcceptor></cash-acceptor>
+
+  <cheque-acceptor *ngIf="chequeTransaction" (triggerPicture)="takePicture()"
+  (chequeAccepted)="chequeAccepted($event)"
+    (triggerCompleteTransaction)="completeTransaction()" #chequeAcceptor>
+  </cheque-acceptor>
+</div>
+
+<!-- 
+<div class=" row-animate">
+
+
+  <div class="row row-animate">
+    <div class="d-none d-lg-block d-xl-block col-xl-3 my-col-1">
+
+    </div>
+    <div class="col-md-12 col-xl-6  my-col-2">
+      <ng-container *ngIf="form_direction == 'ltr'">
+        <table class="table table-bordered">
+          <tbody>
+            
+
+            <ng-container *ngIf="chequeDebitDetails">
+              <th colspan="2">
+                <h4>Debit Account</h4>
+              </th>
+              <tr>
+                <td><b>Cheque #</b></td>
+                <td>{{chequeDebitDetails.chequeNo}}</td>
+              </tr>
+              <tr>
+                <td><b>Account #</b></td>
+                <td>{{chequeDebitDetails.accountNo}}</td>
+              </tr>
+            </ng-container>
+
+            <ng-container *ngIf="billDetail">
+              <tr>
+                <td><b>Company</b></td>
+                <td>{{billDetail.companyName}}</td>
+              </tr>
+
+              <tr>
+                <td><b>Consumer #</b></td>
+                <td>{{billDetail.consumerNumber}}</td>
+              </tr>
+              <tr>
+                <td><b>{{componentLabeling.labels.billingMonth}}</b></td>
+                <td>{{billDetail.billingMonth}}</td>
+              </tr>
+              <tr>
+                <td><b>{{componentLabeling.labels.billed_amount}}</b></td>
+                <td>Rs. {{billDetail.amount}}</td>
+              </tr>
+              <tr>
+                <td><b>{{componentLabeling.labels.bill_due_date}}</b></td>
+                <td>{{billDetail.dueDate}}</td>
+              </tr>
+              <tr>
+                <td><b>{{componentLabeling.labels.bill_status}}</b></td>
+                <td>{{billDetail.status}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </ng-container>  
+
+        <div class="row" *ngIf="!acceptingCash && !onceAccepted">
+        <div class="col-2">
+          <button (click)="cancelConfirmation()" mat-flat-button
+            class="full-width material-cust-large-button theme-sec-button"> <i class="fa fa-home"></i></button>
+        </div>
+        <div class="col-1">
+        </div>
+        <div class="col-2"> <button (click)="navBack()" mat-flat-button
+            class="full-width material-cust-large-button theme-sec-button"><i class="fa fa-arrow-left"></i></button>
+        </div>
+        <div class="col-7"> <button (click)="startDepositFlow()" [disabled]="buttonStateDisabled" mat-flat-button
+            color="primary"
+            class="full-width material-cust-large-button theme-color">{{componentLabeling.buttons.accept}}</button>
+        </div>
+      </div>
+     
+    </div>
+
+  </div>
+  <div> -->
